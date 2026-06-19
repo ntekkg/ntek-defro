@@ -129,6 +129,26 @@ nav.scrolled {
   object-fit: cover;
   display: block;
 }
+#journey-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+#journey-loader.hidden { opacity: 0; }
+#journey-loader-ring {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-top-color: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 .j-vignette {
   position: absolute;
   inset: 0;
@@ -907,7 +927,8 @@ footer { background: #040507; border-top: 1px solid var(--border); }
 <section id="journey">
   <div id="journey-sticky">
 
-    <video id="journey-video" src="Defrooo.mp4" muted playsinline preload="auto" poster="hero-poster.jpg"></video>
+    <video id="journey-video" src="Defrooo-web.mp4" muted playsinline preload="auto"></video>
+    <div id="journey-loader"><div id="journey-loader-ring"></div></div>
     <div class="j-vignette"></div>
 
     <!-- Logo overlay (fades on scroll) -->
@@ -1461,9 +1482,16 @@ function updateJourney(progress) {
 
 // Make video scrubable — must be seekable
 // On mobile, browsers block currentTime seeks until video has been "activated" by play()
+const journeyLoader = document.getElementById('journey-loader');
 video.addEventListener('loadedmetadata', () => {
   video.play().then(() => video.pause()).catch(() => {});
 });
+video.addEventListener('canplaythrough', () => {
+  journeyLoader.classList.add('hidden');
+  setTimeout(() => { journeyLoader.style.display = 'none'; }, 650);
+});
+// Fallback: hide loader after 8s regardless
+setTimeout(() => { journeyLoader.classList.add('hidden'); }, 8000);
 
 // iOS Safari ignores preload="auto" — force load on first touch/scroll
 let videoActivated = false;
