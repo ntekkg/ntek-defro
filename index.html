@@ -121,12 +121,11 @@ nav.scrolled {
   overflow: hidden;
   background: #000;
 }
-#journey-video {
+#journey-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
 }
 #journey-loader {
@@ -927,7 +926,7 @@ footer { background: #040507; border-top: 1px solid var(--border); }
 <section id="journey">
   <div id="journey-sticky">
 
-    <video id="journey-video" src="Defrooo-web.mp4" muted playsinline preload="auto"></video>
+    <canvas id="journey-canvas"></canvas>
     <div id="journey-loader"><div id="journey-loader-ring"></div></div>
     <div class="j-vignette"></div>
 
@@ -1435,12 +1434,53 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 });
 
-// ── VIDEO SCROLL JOURNEY ──
-const video = document.getElementById('journey-video');
+// ── IMAGE SEQUENCE SCROLL JOURNEY ──
+const canvas = document.getElementById('journey-canvas');
+const ctx = canvas.getContext('2d');
 const logoEl = document.getElementById('j-logo');
 const progressFill = document.getElementById('j-progress-fill');
 const scrollHint = document.getElementById('j-scroll-hint');
 const dots = document.querySelectorAll('.j-dot');
+const journeyLoader = document.getElementById('journey-loader');
+
+const TOTAL_FRAMES = 433;
+const FRAME_W = 1280;
+const FRAME_H = 720;
+
+canvas.width = FRAME_W;
+canvas.height = FRAME_H;
+
+const frames = new Array(TOTAL_FRAMES).fill(null);
+let loadedCount = 0;
+let currentFrameIndex = 0;
+
+function drawFrame(index) {
+  const img = frames[index];
+  if (img && img.complete && img.naturalWidth) {
+    ctx.drawImage(img, 0, 0, FRAME_W, FRAME_H);
+  }
+}
+
+// Preload all frames — load near current position first
+function preloadFrames() {
+  for (let i = 0; i < TOTAL_FRAMES; i++) {
+    const img = new Image();
+    const num = String(i + 1).padStart(4, '0');
+    img.src = `frames/f${num}.jpg`;
+    img.onload = () => {
+      loadedCount++;
+      // Draw immediately if this is the current frame
+      if (i === currentFrameIndex) drawFrame(i);
+      // Hide loader once first frame ready
+      if (loadedCount === 1) {
+        journeyLoader.classList.add('hidden');
+        setTimeout(() => { journeyLoader.style.display = 'none'; }, 650);
+      }
+    };
+    frames[i] = img;
+  }
+}
+preloadFrames();
 
 const chapters = [
   { from: 0.000, to: 0.100 },
@@ -1455,37 +1495,20 @@ const chapters = [
   { from: 0.889, to: 1.000 },
 ];
 
-let pendingVideoTime = null;
-let videoRafId = null;
-function scheduleVideoSeek(time) {
-  pendingVideoTime = time;
-  if (!videoRafId) {
-    videoRafId = requestAnimationFrame(() => {
-      if (video.readyState >= 1 && video.duration) {
-        video.currentTime = pendingVideoTime;
-      }
-      videoRafId = null;
-    });
-  }
-}
-
 function updateJourney(progress) {
-  // Update video time — throttled to one seek per animation frame
-  if (video.duration) {
-    scheduleVideoSeek(progress * video.duration);
+  const idx = Math.min(Math.floor(progress * TOTAL_FRAMES), TOTAL_FRAMES - 1);
+  if (idx !== currentFrameIndex) {
+    currentFrameIndex = idx;
+    drawFrame(idx);
   }
 
-  // Progress bar
   progressFill.style.width = (progress * 100) + '%';
 
-  // Logo: fade out in first 6% of scroll
   const logoOpacity = Math.max(0, 1 - progress / 0.06);
   logoEl.style.opacity = logoOpacity;
 
-  // Scroll hint: fade out in first 4%
   scrollHint.style.opacity = Math.max(0, 1 - progress / 0.04);
 
-  // Chapter overlays & dots
   chapters.forEach((ch, i) => {
     const isActive = progress >= ch.from && progress < ch.to;
     const el = document.getElementById('j-o' + i);
@@ -1493,30 +1516,6 @@ function updateJourney(progress) {
     if (dots[i]) dots[i].classList.toggle('active', isActive);
   });
 }
-
-// Make video scrubable — must be seekable
-// On mobile, browsers block currentTime seeks until video has been "activated" by play()
-const journeyLoader = document.getElementById('journey-loader');
-video.addEventListener('loadedmetadata', () => {
-  video.play().then(() => video.pause()).catch(() => {});
-});
-video.addEventListener('canplaythrough', () => {
-  journeyLoader.classList.add('hidden');
-  setTimeout(() => { journeyLoader.style.display = 'none'; }, 650);
-});
-// Fallback: hide loader after 8s regardless
-setTimeout(() => { journeyLoader.classList.add('hidden'); }, 8000);
-
-// iOS Safari ignores preload="auto" — force load on first touch/scroll
-let videoActivated = false;
-function activateVideo() {
-  if (videoActivated) return;
-  videoActivated = true;
-  video.load();
-  video.play().then(() => video.pause()).catch(() => {});
-}
-window.addEventListener('touchstart', activateVideo, { once: true, passive: true });
-window.addEventListener('scroll', activateVideo, { once: true, passive: true });
 
 ScrollTrigger.create({
   trigger: '#journey',
