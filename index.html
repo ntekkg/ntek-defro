@@ -1455,10 +1455,24 @@ const chapters = [
   { from: 0.889, to: 1.000 },
 ];
 
+let pendingVideoTime = null;
+let videoRafId = null;
+function scheduleVideoSeek(time) {
+  pendingVideoTime = time;
+  if (!videoRafId) {
+    videoRafId = requestAnimationFrame(() => {
+      if (video.readyState >= 1 && video.duration) {
+        video.currentTime = pendingVideoTime;
+      }
+      videoRafId = null;
+    });
+  }
+}
+
 function updateJourney(progress) {
-  // Update video time
-  if (video.readyState >= 2 && video.duration) {
-    video.currentTime = progress * video.duration;
+  // Update video time — throttled to one seek per animation frame
+  if (video.duration) {
+    scheduleVideoSeek(progress * video.duration);
   }
 
   // Progress bar
