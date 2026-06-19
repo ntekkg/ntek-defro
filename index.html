@@ -1444,11 +1444,15 @@ const dots = document.querySelectorAll('.j-dot');
 const journeyLoader = document.getElementById('journey-loader');
 
 const TOTAL_FRAMES = 433;
-const FRAME_W = 1280;
-const FRAME_H = 720;
+const SRC_W = 1280;
+const SRC_H = 720;
 
-canvas.width = FRAME_W;
-canvas.height = FRAME_H;
+function resizeCanvas() {
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = canvas.offsetWidth * dpr;
+  canvas.height = canvas.offsetHeight * dpr;
+  drawFrame(currentFrameIndex);
+}
 
 const frames = new Array(TOTAL_FRAMES).fill(null);
 let loadedCount = 0;
@@ -1456,9 +1460,20 @@ let currentFrameIndex = 0;
 
 function drawFrame(index) {
   const img = frames[index];
-  if (img && img.complete && img.naturalWidth) {
-    ctx.drawImage(img, 0, 0, FRAME_W, FRAME_H);
+  if (!img || !img.complete || !img.naturalWidth) return;
+  const cw = canvas.width, ch = canvas.height;
+  // object-fit: cover math
+  const imgAspect = SRC_W / SRC_H;
+  const canvasAspect = cw / ch;
+  let sx, sy, sw, sh;
+  if (imgAspect > canvasAspect) {
+    sh = SRC_H; sw = sh * canvasAspect;
+    sx = (SRC_W - sw) / 2; sy = 0;
+  } else {
+    sw = SRC_W; sh = sw / canvasAspect;
+    sx = 0; sy = (SRC_H - sh) / 2;
   }
+  ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
 }
 
 // Preload all frames — load near current position first
@@ -1481,6 +1496,8 @@ function preloadFrames() {
   }
 }
 preloadFrames();
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
 
 const chapters = [
   { from: 0.000, to: 0.100 },
