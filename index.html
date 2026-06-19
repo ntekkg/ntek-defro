@@ -1460,10 +1460,21 @@ function updateJourney(progress) {
 }
 
 // Make video scrubable — must be seekable
+// On mobile, browsers block currentTime seeks until video has been "activated" by play()
 video.addEventListener('loadedmetadata', () => {
-  // Preload all frames for smooth scrubbing
-  video.pause();
+  video.play().then(() => video.pause()).catch(() => {});
 });
+
+// iOS Safari ignores preload="auto" — force load on first touch/scroll
+let videoActivated = false;
+function activateVideo() {
+  if (videoActivated) return;
+  videoActivated = true;
+  video.load();
+  video.play().then(() => video.pause()).catch(() => {});
+}
+window.addEventListener('touchstart', activateVideo, { once: true, passive: true });
+window.addEventListener('scroll', activateVideo, { once: true, passive: true });
 
 ScrollTrigger.create({
   trigger: '#journey',
