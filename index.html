@@ -423,6 +423,78 @@ h3 {
 .how-step h3 { font-size: 22px; margin-bottom: 16px; }
 .how-step p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7; }
 
+/* ── FILTRATION ── */
+#filtration { padding: 120px 0; background: var(--bg); }
+.filt-intro { max-width: 760px; margin-bottom: 80px; }
+.filt-intro p { font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.65); margin-top: 24px; max-width: 640px; }
+.filt-split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; margin-bottom: 96px; }
+.filt-crisis-stat { margin-bottom: 40px; }
+.filt-crisis-num {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: clamp(80px, 12vw, 140px); line-height: 0.88;
+  color: #e84040; letter-spacing: -2px; display: block;
+}
+.filt-crisis-sub {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+  font-size: 18px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); margin-top: 10px;
+}
+.filt-crisis-body { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.6); }
+.filt-crisis-body strong { color: var(--white); }
+.filt-source { font-size: 11px; color: rgba(255,255,255,0.28); letter-spacing: 1px; margin-top: 28px; }
+/* city chart */
+.city-chart { display: flex; flex-direction: column; gap: 10px; }
+.city-row { display: grid; grid-template-columns: 130px 1fr 56px; gap: 12px; align-items: center; }
+.city-label { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; color: rgba(255,255,255,0.65); text-align: right; }
+.city-label.highlight { color: #e84040; font-weight: 700; }
+.city-track { height: 28px; background: rgba(255,255,255,0.04); position: relative; overflow: hidden; border-radius: 2px; }
+.city-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0; transition: width 1.2s cubic-bezier(0.25,0.46,0.45,0.94); border-radius: 2px; }
+.city-fill.c-danger { background: linear-gradient(to right, #c0392b, #e84040); }
+.city-fill.c-high { background: linear-gradient(to right, #e67e22, #f39c12); }
+.city-fill.c-mid { background: linear-gradient(to right, #2980b9, #3498db); }
+.city-fill.c-ok { background: linear-gradient(to right, #27ae60, #2ecc71); }
+.city-fill.c-who { background: linear-gradient(to right, #1a6faa, #4fb3e8); }
+.city-val { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5); }
+.city-val.highlight { color: #e84040; }
+.city-chart-legend { display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap; }
+.city-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
+.city-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+/* health effects */
+.health-header { text-align: center; margin-bottom: 56px; }
+.health-header p { font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.55); max-width: 620px; margin: 20px auto 0; }
+.health-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 80px; }
+.health-card { background: var(--surface); padding: 40px 32px; border: 1px solid var(--border); position: relative; overflow: hidden; transition: border-color 0.3s; }
+.health-card:hover { border-color: rgba(232,64,64,0.3); }
+.health-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #e84040; transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+.health-card:hover::before { transform: scaleX(1); }
+.health-icon { width: 44px; height: 44px; margin-bottom: 20px; color: #e84040; }
+.health-card h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; margin-bottom: 10px; }
+.health-card p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.55); }
+/* HEPA callout */
+.hepa-callout { background: var(--surface); border: 1px solid rgba(26,111,170,0.25); padding: 56px 64px; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; position: relative; overflow: hidden; }
+.hepa-callout::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--blue), var(--blue-light)); }
+.hepa-badge-row { display: flex; gap: 40px; margin-top: 24px; flex-wrap: wrap; }
+.hepa-badge { display: flex; flex-direction: column; }
+.hepa-badge .val { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 36px; color: var(--blue-light); line-height: 1; }
+.hepa-badge .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 0.5px; }
+.hepa-cta-block { text-align: center; }
+.hepa-cta-block .hepa-logo-txt { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 48px; letter-spacing: 4px; color: var(--white); line-height: 1; }
+.hepa-cta-block .hepa-logo-sub { font-size: 12px; letter-spacing: 3px; color: var(--blue-light); text-transform: uppercase; margin-bottom: 24px; }
+.btn-filt-cta { display: inline-block; background: var(--blue); color: var(--white); border: none; cursor: pointer; padding: 14px 32px; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; transition: background 0.2s, transform 0.2s; }
+.btn-filt-cta:hover { background: var(--blue-light); transform: translateY(-1px); }
+/* responsive */
+@media (max-width: 900px) {
+  .filt-split { grid-template-columns: 1fr; gap: 48px; }
+  .health-grid { grid-template-columns: repeat(2, 1fr); }
+  .hepa-callout { grid-template-columns: 1fr; gap: 36px; padding: 40px 32px; }
+  .city-row { grid-template-columns: 100px 1fr 50px; }
+}
+@media (max-width: 600px) {
+  .health-grid { grid-template-columns: 1fr; }
+  .city-row { grid-template-columns: 80px 1fr 44px; }
+  .city-label { font-size: 11px; }
+}
+
 /* ── CO2 ── */
 #co2 { padding: 120px 0; background: var(--surface); }
 .co2-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: center; }
@@ -1129,6 +1201,167 @@ footer { background: #040507; border-top: 1px solid var(--border); }
 </section>
 
 
+<!-- FILTRATION -->
+<section id="filtration">
+  <div class="container">
+
+    <div class="filt-intro reveal">
+      <div class="section-label" data-i18n="filt.label">О воздухе</div>
+      <h2 data-i18n-html="filt.h2">ФИЛЬТРАЦИЯ<br><span style="color:#e84040">ВОЗДУХА</span></h2>
+      <p data-i18n="filt.sub">Воздух внутри помещения в 2–5 раз грязнее уличного. В Бишкеке — во много раз хуже: город входит в топ-10 самых загрязнённых столиц мира по данным IQAir. Каждый вдох без фильтрации несёт частицы смога, сажи и тяжёлых металлов прямо в лёгкие.</p>
+    </div>
+
+    <div class="filt-split">
+      <!-- Left: crisis stat + text -->
+      <div class="reveal-left">
+        <div class="filt-crisis-stat">
+          <span class="filt-crisis-num">×10</span>
+          <div class="filt-crisis-sub" data-i18n="filt.stat.sub">превышение нормы ВОЗ</div>
+        </div>
+        <p class="filt-crisis-body" data-i18n-html="filt.body">
+          Среднегодовой уровень PM2.5 в Бишкеке — <strong>~50 мкг/м³</strong>. Норма ВОЗ — <strong>5 мкг/м³</strong>.<br><br>
+          Зимой, в сезон отопления углём, показатели достигают <strong>300–400 мкг/м³</strong> — это уровень «опасно» по шкале AQI. В это время именно дома люди дышат самым грязным воздухом.<br><br>
+          В 2019 году IQAir признал Бишкек <strong>самым загрязнённым столичным городом в мире</strong> по концентрации PM2.5.
+        </p>
+        <div class="filt-source" data-i18n="filt.source">Источник: IQAir World Air Quality Report 2019–2023</div>
+      </div>
+
+      <!-- Right: city comparison chart -->
+      <div class="reveal-right">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--blue-light);margin-bottom:20px" data-i18n="filt.chart.title">PM2.5 · мкг/м³ · среднегодовой</div>
+        <div class="city-chart" id="city-chart">
+          <div class="city-row">
+            <div class="city-label" style="color:rgba(255,255,255,0.3)">ВОЗ норма</div>
+            <div class="city-track"><div class="city-fill c-who" data-city-width="5.4%"></div></div>
+            <div class="city-val" style="color:rgba(255,255,255,0.3)">5</div>
+          </div>
+          <div class="city-row">
+            <div class="city-label">Берлин</div>
+            <div class="city-track"><div class="city-fill c-ok" data-city-width="11.8%"></div></div>
+            <div class="city-val">11</div>
+          </div>
+          <div class="city-row">
+            <div class="city-label">Москва</div>
+            <div class="city-track"><div class="city-fill c-ok" data-city-width="12.9%"></div></div>
+            <div class="city-val">12</div>
+          </div>
+          <div class="city-row">
+            <div class="city-label">Стамбул</div>
+            <div class="city-track"><div class="city-fill c-mid" data-city-width="22.6%"></div></div>
+            <div class="city-val">21</div>
+          </div>
+          <div class="city-row">
+            <div class="city-label">Каир</div>
+            <div class="city-track"><div class="city-fill c-high" data-city-width="51.6%"></div></div>
+            <div class="city-val">48</div>
+          </div>
+          <div class="city-row">
+            <div class="city-label highlight">Бишкек ⚠</div>
+            <div class="city-track"><div class="city-fill c-danger" data-city-width="53.8%"></div></div>
+            <div class="city-val highlight">50</div>
+          </div>
+          <div class="city-row">
+            <div class="city-label">Лахор</div>
+            <div class="city-track"><div class="city-fill c-danger" style="opacity:0.55" data-city-width="93.5%"></div></div>
+            <div class="city-val">87</div>
+          </div>
+          <div class="city-row">
+            <div class="city-label">Дели</div>
+            <div class="city-track"><div class="city-fill c-danger" style="opacity:0.55" data-city-width="100%"></div></div>
+            <div class="city-val">93</div>
+          </div>
+        </div>
+        <div class="filt-source" style="margin-top:12px" data-i18n="filt.source">Источник: IQAir World Air Quality Report 2019–2023</div>
+      </div>
+    </div>
+
+    <!-- Health effects -->
+    <div class="health-header reveal">
+      <div class="section-label" data-i18n="filt.health.label">Последствия</div>
+      <h2 data-i18n-html="filt.health.h2">СМОГ УБИВАЕТ<br><span style="color:#e84040">МОЛЧА</span></h2>
+      <p data-i18n="filt.health.sub">PM2.5 — частицы диаметром менее 2.5 микрометра. Они настолько малы, что проникают сквозь лёгкие в кровь. ВОЗ признаёт загрязнение воздуха главным экологическим риском для здоровья человека.</p>
+    </div>
+
+    <div class="health-grid">
+      <div class="health-card reveal">
+        <svg class="health-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 6C24 6 10 16 10 28a14 14 0 0 0 28 0C38 16 24 6 24 6z"/>
+          <path d="M18 28c0-4 3-7 6-9"/>
+          <path d="M24 19v5l3 3"/>
+        </svg>
+        <h4 data-i18n="filt.h.lung">Лёгкие</h4>
+        <p data-i18n="filt.p.lung">Хронический бронхит, астма, ХОБЛ — прямые следствия долгосрочного вдыхания PM2.5. Частицы оседают в альвеолах навсегда.</p>
+      </div>
+      <div class="health-card reveal">
+        <svg class="health-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 10 C18 10 12 15 12 22 C12 32 24 40 24 40 C24 40 36 32 36 22 C36 15 30 10 24 10z"/>
+          <path d="M19 22 l3 3 l7-7"/>
+        </svg>
+        <h4 data-i18n="filt.h.heart">Сердце</h4>
+        <p data-i18n="filt.p.heart">PM2.5 вызывает воспаление сосудов, атеросклероз и риск инфаркта. Загрязнённый воздух — одна из главных причин сердечно-сосудистых заболеваний.</p>
+      </div>
+      <div class="health-card reveal">
+        <svg class="health-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="24" cy="22" rx="14" ry="12"/>
+          <path d="M16 34c0 5 16 5 16 0"/>
+          <path d="M19 19 q2-3 5 0 q2 3 5 0"/>
+        </svg>
+        <h4 data-i18n="filt.h.brain">Мозг</h4>
+        <p data-i18n="filt.p.brain">Исследования связывают хроническое воздействие PM2.5 со снижением IQ у детей, деменцией и болезнью Альцгеймера у взрослых.</p>
+      </div>
+      <div class="health-card reveal">
+        <svg class="health-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="24" r="8"/>
+          <path d="M6 24 C6 24 14 12 24 12 C34 12 42 24 42 24"/>
+          <path d="M6 24 C6 24 14 36 24 36 C34 36 42 24 42 24"/>
+        </svg>
+        <h4 data-i18n="filt.h.immune">Иммунитет</h4>
+        <p data-i18n="filt.p.immune">Постоянная нагрузка на иммунную систему ведёт к хронической усталости, частым ОРВИ и сниженной защите от вирусов.</p>
+      </div>
+      <div class="health-card reveal">
+        <svg class="health-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="18" r="8"/>
+          <path d="M12 40 C12 32 36 32 36 40"/>
+          <path d="M30 10 q4-2 6 2"/>
+        </svg>
+        <h4 data-i18n="filt.h.children">Дети</h4>
+        <p data-i18n="filt.p.children">Детские лёгкие развиваются до 18 лет. Загрязнённый воздух необратимо замедляет рост лёгочной ткани и увеличивает риск астмы на 40%.</p>
+      </div>
+      <div class="health-card reveal">
+        <svg class="health-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 20 C8 12 16 8 24 8 C32 8 40 12 40 20 L40 28 C40 36 32 40 24 40 C16 40 8 36 8 28 Z"/>
+          <path d="M20 26 l2 2 l4-4"/>
+          <path d="M16 20 h2"/>
+          <path d="M30 20 h2"/>
+        </svg>
+        <h4 data-i18n="filt.h.sleep">Сон</h4>
+        <p data-i18n="filt.p.sleep">Токсины в воздухе нарушают фазы глубокого сна. Утренняя усталость, головная боль и снижение концентрации — симптомы ночного отравления воздухом.</p>
+      </div>
+    </div>
+
+    <!-- HEPA callout -->
+    <div class="hepa-callout reveal">
+      <div>
+        <div class="section-label" data-i18n="filt.hepa.label">Решение</div>
+        <h3 data-i18n-html="filt.hepa.h3">HEPA 13 — <em style="color:var(--blue-light);font-style:italic">единственная</em><br>надёжная защита</h3>
+        <p style="font-size:15px;line-height:1.8;color:rgba(255,255,255,0.6);margin-top:16px;max-width:480px" data-i18n="filt.hepa.p">Фильтры HEPA 13 — медицинский стандарт. Они задерживают 99.97% частиц размером от 0.3 мкм. DEFRO air оснащён фильтрами из углеродного волокна, которые улавливают PM2.5, сажу, аллергены, бактерии и вирусы.</p>
+        <div class="hepa-badge-row">
+          <div class="hepa-badge"><span class="val">99.97%</span><span class="lbl" data-i18n="filt.hepa.b1">частиц задержано</span></div>
+          <div class="hepa-badge"><span class="val">0.3 мкм</span><span class="lbl" data-i18n="filt.hepa.b2">минимальный размер</span></div>
+          <div class="hepa-badge"><span class="val">HEPA 13</span><span class="lbl" data-i18n="filt.hepa.b3">медицинский класс</span></div>
+        </div>
+      </div>
+      <div class="hepa-cta-block">
+        <div class="hepa-logo-txt">DEFRO</div>
+        <div class="hepa-logo-sub">air</div>
+        <button class="btn-filt-cta" data-i18n="filt.hepa.cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Узнать стоимость</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 <!-- CO2 -->
 <section id="co2">
   <div class="container">
@@ -1560,6 +1793,15 @@ document.querySelectorAll('.co2-bar-fill').forEach(bar => {
   });
 });
 
+// ── City chart bars ──
+document.querySelectorAll('.city-fill').forEach(bar => {
+  const w = bar.dataset.cityWidth;
+  ScrollTrigger.create({
+    trigger: bar, start: 'top 85%', once: true,
+    onEnter() { gsap.to(bar, { width: w, duration: 1.2, ease: 'power3.out' }); }
+  });
+});
+
 // ── Stagger animations ──
 gsap.from('.about-num-card', {
   scrollTrigger: { trigger: '.about-numbers', start: 'top 80%', once: true },
@@ -1611,6 +1853,7 @@ const translations = {
     },
     about: { label:'О производителе', h2:'ЧИСТЫЙ ВОЗДУХ —<br><span style="color:var(--blue-light)">ЕВРОПЕЙСКАЯ НАДЁЖНОСТЬ</span>', p1:'Бишкек входит в топ-10 самых загрязнённых городов мира. DEFRO air фильтрует PM2.5, смог и бактерии ещё на входе — прямо у стены дома.', p2:'DEFRO производит вентиляционное оборудование с 1973 года. Системы сертифицированы по европейским стандартам, поставляются в десятки стран. NTEK — официальный дистрибьютор в Кыргызстане.', num1:'Год основания компании в Польше', num2:'Сотрудников на производстве', num3:'Единиц оборудования в год', num4:'Класс энергоэффективности всей линейки' },
     how: { h2:'ФУНКЦИОНАЛ<br><span style="color:var(--blue-light)">СИСТЕМЫ</span>', s1:{h3:'Фильтрация воздуха',p:'HEPA 13 задерживает смог, PM2.5, запахи и бактерии. Воздух в доме чище, чем снаружи.'}, s2:{h3:'Рекуперация тепла',p:'Противоточный теплообменник возвращает до 95% тепла из вытяжного воздуха. Свежий воздух без потерь тепла и лишних затрат на отопление.'}, s3:{h3:'Увлажнение воздуха',p:'Система поддерживает 40–60% влажности — оптимальный диапазон для здоровья дыхательных путей и иммунитета.'} },
+    filt: { label:'О воздухе', h2:'ФИЛЬТРАЦИЯ<br><span style="color:#e84040">ВОЗДУХА</span>', sub:'Воздух внутри помещения в 2–5 раз грязнее уличного. В Бишкеке — во много раз хуже: город входит в топ-10 самых загрязнённых столиц мира по данным IQAir. Каждый вдох без фильтрации несёт частицы смога, сажи и тяжёлых металлов прямо в лёгкие.', stat:{sub:'превышение нормы ВОЗ'}, body:'Среднегодовой уровень PM2.5 в Бишкеке — <strong>~50 мкг/м³</strong>. Норма ВОЗ — <strong>5 мкг/м³</strong>.<br><br>Зимой, в сезон отопления углём, показатели достигают <strong>300–400 мкг/м³</strong> — это уровень «опасно» по шкале AQI. В это время именно дома люди дышат самым грязным воздухом.<br><br>В 2019 году IQAir признал Бишкек <strong>самым загрязнённым столичным городом в мире</strong> по концентрации PM2.5.', source:'Источник: IQAir World Air Quality Report 2019–2023', chart:{title:'PM2.5 · мкг/м³ · среднегодовой'}, health:{label:'Последствия', h2:'СМОГ УБИВАЕТ<br><span style="color:#e84040">МОЛЧА</span>', sub:'PM2.5 — частицы диаметром менее 2.5 микрометра. Они настолько малы, что проникают сквозь лёгкие в кровь. ВОЗ признаёт загрязнение воздуха главным экологическим риском для здоровья человека.'}, h:{lung:'Лёгкие', heart:'Сердце', brain:'Мозг', immune:'Иммунитет', children:'Дети', sleep:'Сон'}, p:{lung:'Хронический бронхит, астма, ХОБЛ — прямые следствия долгосрочного вдыхания PM2.5. Частицы оседают в альвеолах навсегда.', heart:'PM2.5 вызывает воспаление сосудов, атеросклероз и риск инфаркта. Загрязнённый воздух — одна из главных причин сердечно-сосудистых заболеваний.', brain:'Исследования связывают хроническое воздействие PM2.5 со снижением IQ у детей, деменцией и болезнью Альцгеймера у взрослых.', immune:'Постоянная нагрузка на иммунную систему ведёт к хронической усталости, частым ОРВИ и сниженной защите от вирусов.', children:'Детские лёгкие развиваются до 18 лет. Загрязнённый воздух необратимо замедляет рост лёгочной ткани и увеличивает риск астмы на 40%.', sleep:'Токсины в воздухе нарушают фазы глубокого сна. Утренняя усталость, головная боль и снижение концентрации — симптомы ночного отравления воздухом.'}, hepa:{label:'Решение', h3:'HEPA 13 — <em style="color:var(--blue-light);font-style:italic">единственная</em><br>надёжная защита', p:'Фильтры HEPA 13 — медицинский стандарт. Они задерживают 99.97% частиц размером от 0.3 мкм. DEFRO air оснащён фильтрами из углеродного волокна, которые улавливают PM2.5, сажу, аллергены, бактерии и вирусы.', b1:'частиц задержано', b2:'минимальный размер', b3:'медицинский класс', cta:'Узнать стоимость'} },
     co2: { h2:'ВЛИЯНИЕ<br><span style="color:var(--blue-light);white-space:nowrap;display:inline-block;margin-bottom:0.2em">CO<sub style="font-size:0.45em;line-height:0;vertical-align:sub">2</sub></span><br>НА ЧЕЛОВЕКА', sub:'Рекомендации ASHRAE и OSHA: уровень CO₂ в помещении не должен превышать 1000 ppm.', badge:'ppm поддерживает<br>DEFRO air', bar0:'✅ DEFRO — норма<br>на улице', bar1:'Допустимый уровень<br>(ASHRAE/OSHA)', bar2:'Сонливость, слабость,<br>головная боль', bar3:'Серьёзные отклонения<br>в здоровье', bar4:'Предельная концентрация<br>за 8 часов' },
     feat: { h2:'ТЕХНИЧЕСКИЕ<br><span style="color:var(--blue-light)">ПРЕИМУЩЕСТВА</span>', hero1:{h4:'Рекуперация тепла',p:'Противоточный теплообменник возвращает 95% тепла удаляемого воздуха. Экономия на отоплении — ощутима с первого месяца.'}, hero2:{h4:'Фильтрация HEPA 13',p:'Задерживает PM2.5, аллергены, бактерии и частицы смога. Воздух в квартире чище, чем на свежем воздухе в Бишкеке.'}, s1:{h4:'Увлажнение',p:'Поддерживает 40–60% — единственный безопасный диапазон для здоровья и иммунитета'}, s2:{h4:'WiFi управление',p:'Полное управление через приложение из любой точки мира'}, s3:{h4:'Класс A',p:'EC-вентиляторы от 100 Вт. Минимальное потребление энергии'}, s4:{h4:'Flow Balancing',p:'Автоматическая балансировка потоков снижает затраты на отопление'}, s5:{h4:'Тихая работа',p:'От 41 дБ — работает круглосуточно и не слышна даже ночью'}, s6:{h4:'Антибактериальные',p:'Покрытие воздуховодов препятствует росту плесени и микроорганизмов'} },
     compare: { h2:'ПОЧЕМУ<br><span style="color:var(--blue-light)">DEFRO?</span>', th0:'Тип вентиляции', th1:'Увлажнение', th2:'Рекуперация', th3:'Фильтрация', th4:'Регулировка', th5:'Шум', th6:'Энергия', th7:'Итог', row0:'Окно', row1:'Приточный клапан', row2:'Бризер', row3:'DEFRO air', high:'Высокий', mid:'Средний', low:'Низкий', highE:'Высокое', lowA:'Низкое А' },
@@ -1638,6 +1881,7 @@ const translations = {
     },
     about: { label:'Өндүрүүчү жөнүндө', h2:'ТАЗА АБА —<br><span style="color:var(--blue-light)">ПОЛЬША ИШЕНИМДҮҮЛҮГҮ</span>', p1:'Бишкек дүйнөдөгү эң булганган 10 шаардын катарына кирет. DEFRO air PM2.5, смог жана бактерияларды кирүү жеринде эле чыпкалайт — үйдүн дубалынын жанынан.', p2:'DEFRO 1973-жылдан бери желдетүү жабдыктарын чыгарып келет. Системалар европалык стандарттар боюнча сертификатталган, ондогон өлкөгө жеткирилет. NTEK — Кыргызстандагы расмий дистрибьютор.', num1:'Польшада компания негизделген жыл', num2:'Өндүрүштөгү кызматкерлер саны', num3:'Жылына жабдуу бирдиктери', num4:'Бүтүндөй линейканын энергия натыйжалуулук классы' },
     how: { h2:'СИСТЕМАНЫН<br><span style="color:var(--blue-light)">ФУНКЦИОНАЛЫ</span>', s1:{h3:'Абаны чыпкалоо',p:'HEPA 13 смогду, PM2.5, жыттарды жана бактерияларды кармайт. Үйдөгү аба сырттагыдан таза.'}, s2:{h3:'Жылуулукту калыбына келтирүү',p:'Каршы агым жылуулук алмашкычы чыгаруу абасынан 95%ке чейин жылуулукту кайтарат. Жылуулук жоготуусуз жана ашыкча жылытуу чыгашаларысыз таза аба.'}, s3:{h3:'Абаны нымдоо',p:'Система 40–60% нымдуулукту колдоп турат — дем алуу жолдорунун ден соолугу жана иммунитет үчүн оптималдуу диапазон.'} },
+    filt: { label:'О воздухе', h2:'ФИЛЬТРАЦИЯ<br><span style="color:#e84040">ВОЗДУХА</span>', sub:'Воздух внутри помещения в 2–5 раз грязнее уличного. В Бишкеке — во много раз хуже: город входит в топ-10 самых загрязнённых столиц мира по данным IQAir. Каждый вдох без фильтрации несёт частицы смога, сажи и тяжёлых металлов прямо в лёгкие.', stat:{sub:'превышение нормы ВОЗ'}, body:'Среднегодовой уровень PM2.5 в Бишкеке — <strong>~50 мкг/м³</strong>. Норма ВОЗ — <strong>5 мкг/м³</strong>.<br><br>Зимой, в сезон отопления углём, показатели достигают <strong>300–400 мкг/м³</strong> — это уровень «опасно» по шкале AQI. В это время именно дома люди дышат самым грязным воздухом.<br><br>В 2019 году IQAir признал Бишкек <strong>самым загрязнённым столичным городом в мире</strong> по концентрации PM2.5.', source:'Источник: IQAir World Air Quality Report 2019–2023', chart:{title:'PM2.5 · мкг/м³ · среднегодовой'}, health:{label:'Последствия', h2:'СМОГ УБИВАЕТ<br><span style="color:#e84040">МОЛЧА</span>', sub:'PM2.5 — частицы диаметром менее 2.5 микрометра. Они настолько малы, что проникают сквозь лёгкие в кровь. ВОЗ признаёт загрязнение воздуха главным экологическим риском для здоровья человека.'}, h:{lung:'Лёгкие', heart:'Сердце', brain:'Мозг', immune:'Иммунитет', children:'Дети', sleep:'Сон'}, p:{lung:'Хронический бронхит, астма, ХОБЛ — прямые следствия долгосрочного вдыхания PM2.5. Частицы оседают в альвеолах навсегда.', heart:'PM2.5 вызывает воспаление сосудов, атеросклероз и риск инфаркта. Загрязнённый воздух — одна из главных причин сердечно-сосудистых заболеваний.', brain:'Исследования связывают хроническое воздействие PM2.5 со снижением IQ у детей, деменцией и болезнью Альцгеймера у взрослых.', immune:'Постоянная нагрузка на иммунную систему ведёт к хронической усталости, частым ОРВИ и сниженной защите от вирусов.', children:'Детские лёгкие развиваются до 18 лет. Загрязнённый воздух необратимо замедляет рост лёгочной ткани и увеличивает риск астмы на 40%.', sleep:'Токсины в воздухе нарушают фазы глубокого сна. Утренняя усталость, головная боль и снижение концентрации — симптомы ночного отравления воздухом.'}, hepa:{label:'Решение', h3:'HEPA 13 — <em style="color:var(--blue-light);font-style:italic">единственная</em><br>надёжная защита', p:'Фильтры HEPA 13 — медицинский стандарт. Они задерживают 99.97% частиц размером от 0.3 мкм. DEFRO air оснащён фильтрами из углеродного волокна, которые улавливают PM2.5, сажу, аллергены, бактерии и вирусы.', b1:'частиц задержано', b2:'минимальный размер', b3:'медицинский класс', cta:'Узнать стоимость'} },
     co2: { h2:'<span style="display:inline-block;margin-bottom:0.2em">CO<sub style="font-size:0.45em;line-height:0;vertical-align:sub">2</sub>НУН</span><br><span style="color:var(--blue-light)">АДАМГА</span><br>ТААСИРИ', sub:'ASHRAE жана OSHA сунуштамалары: бөлмөдөгү CO₂ деңгээли 1000 ppm-ден ашпашы керек.', badge:'ppm деңгээлин<br>DEFRO air колдойт', bar0:'✅ DEFRO — көчөдөгү<br>норма', bar1:'Уруксат берилген деңгээл<br>(ASHRAE/OSHA)', bar2:'Уйкучулук, алсыздык,<br>баш оорусу', bar3:'Ден соолукта олуттуу<br>жетишпестиктер', bar4:'8 саат үчүн<br>чектик концентрация' },
     feat: { h2:'ТЕХНИКАЛЫК<br><span style="color:var(--blue-light)">АРТЫКЧЫЛЫКТАРЫ</span>', hero1:{h4:'Жылуулукту калыбына келтирүү',p:'Каршы агым жылуулук алмашкычы алынуучу абанын жылуулугунун 95%ин кайтарат. Жылытуудан үнөмдөө — биринчи айдан баштап байкалат.'}, hero2:{h4:'HEPA 13 чыпкалоо',p:'PM2.5, аллергендерди, бактерияларды жана смог бөлүкчөлөрүн кармайт. Батирдеги аба Бишкектеги ачык абадан да таза.'}, s1:{h4:'Нымдоо',p:'40–60% колдоп турат — ден соолук жана иммунитет үчүн бирден-бир коопсуз диапазон'}, s2:{h4:'WiFi башкаруу',p:'Дүйнөнүн каалаган жеринен тиркеме аркылуу толук башкаруу'}, s3:{h4:'A классы',p:'EC-желдеткичтер 100 Вт дан. Минималдуу энергия керектөө'}, s4:{h4:'Flow Balancing',p:'Агымдарды автоматтык теңдөө жылытуу чыгашаларын азайтат'}, s5:{h4:'Тынч иштөө',p:'41 дБ дан — дайыма иштейт жана түнкүсүн да угулбайт'}, s6:{h4:'Антибактериалдык',p:'Аба каналдарынын капталы чиримик жана микроорганизмдердин өсүшүнө жол бербейт'} },
     compare: { h2:'ЭМНЕ ҮЧҮН<br><span style="color:var(--blue-light)">DEFRO?</span>', th0:'Желдетүү түрү', th1:'Нымдоо', th2:'Рекуперация', th3:'Чыпкалоо', th4:'Жөнгө салуу', th5:'Шоокум', th6:'Энергия', th7:'Жыйынтык', row0:'Терезе', row1:'Кирүүчү клапан', row2:'Бризер', row3:'DEFRO air', high:'Жогорку', mid:'Орточо', low:'Төмөн', highE:'Жогорку', lowA:'Төмөн А' },
@@ -1665,6 +1909,7 @@ const translations = {
     },
     about: { label:'About the Manufacturer', h2:'CLEAN AIR —<br><span style="color:var(--blue-light)">POLISH RELIABILITY</span>', p1:'Bishkek ranks among the world\'s top 10 most polluted cities. DEFRO air filters PM2.5, smog and bacteria at the point of entry — right at your home\'s wall.', p2:'DEFRO has manufactured ventilation equipment since 1973. Systems are certified to European standards and supplied to dozens of countries. NTEK is the official distributor in Kyrgyzstan.', num1:'Year founded in Poland', num2:'Production employees', num3:'Units produced per year', num4:'Energy efficiency class across the full range' },
     how: { h2:'HOW IT<br><span style="color:var(--blue-light)">WORKS</span>', s1:{h3:'Air Filtration',p:'HEPA 13 filters smog, PM2.5, odours and bacteria. Indoor air is cleaner than outside.'}, s2:{h3:'Heat Recovery',p:'The counter-flow heat exchanger recovers up to 95% of heat from exhaust air. Fresh air without heat loss or extra heating costs.'}, s3:{h3:'Air Humidification',p:'The system maintains 40–60% humidity — the optimal range for respiratory health and immunity.'} },
+    filt: { label:'About Air', h2:'AIR<br><span style="color:#e84040">FILTRATION</span>', sub:'Indoor air is 2–5× more polluted than outdoor air. In Bishkek it is far worse: the city ranks in the top 10 most polluted capitals in the world according to IQAir. Every breath without filtration carries smog, soot and heavy metal particles straight into the lungs.', stat:{sub:'times above WHO limit'}, body:'Bishkek\'s annual average PM2.5 level is <strong>~50 µg/m³</strong>. The WHO limit is <strong>5 µg/m³</strong>.<br><br>In winter, during the coal heating season, readings reach <strong>300–400 µg/m³</strong> — the "hazardous" band on the AQI scale. This is when people breathe the most polluted air right at home.<br><br>In 2019 IQAir declared Bishkek <strong>the most polluted capital city in the world</strong> by PM2.5 concentration.', source:'Source: IQAir World Air Quality Report 2019–2023', chart:{title:'PM2.5 · µg/m³ · annual average'}, health:{label:'Health Effects', h2:'SMOG KILLS<br><span style="color:#e84040">SILENTLY</span>', sub:'PM2.5 particles are smaller than 2.5 micrometres in diameter — so tiny they pass through lung tissue into the bloodstream. The WHO recognises air pollution as the single greatest environmental health risk.'}, h:{lung:'Lungs', heart:'Heart', brain:'Brain', immune:'Immunity', children:'Children', sleep:'Sleep'}, p:{lung:'Chronic bronchitis, asthma, and COPD are direct consequences of long-term PM2.5 inhalation. Particles lodge permanently in the alveoli.', heart:'PM2.5 causes vascular inflammation, atherosclerosis and elevated heart-attack risk. Polluted air is one of the leading drivers of cardiovascular disease.', brain:'Research links chronic PM2.5 exposure to lower childhood IQ, dementia and Alzheimer\'s disease in adults.', immune:'Constant stress on the immune system leads to chronic fatigue, frequent colds and reduced protection against viruses.', children:'Children\'s lungs develop until age 18. Polluted air irreversibly slows lung tissue growth and raises asthma risk by 40%.', sleep:'Airborne toxins disrupt deep-sleep phases. Morning fatigue, headache and difficulty concentrating are symptoms of overnight air poisoning.'}, hepa:{label:'Solution', h3:'HEPA 13 — <em style="color:var(--blue-light);font-style:italic">the only</em><br>reliable protection', p:'HEPA 13 filters are a medical-grade standard. They capture 99.97% of particles 0.3 µm and larger. DEFRO air uses carbon-fibre filters that trap PM2.5, soot, allergens, bacteria and viruses.', b1:'of particles captured', b2:'minimum particle size', b3:'medical grade', cta:'Get a Quote'} },
     co2: { h2:'<span style="display:inline-block;margin-bottom:0.2em">HOW CO<sub style="font-size:0.45em;line-height:0;vertical-align:sub">2</sub></span><br><span style="color:var(--blue-light)">AFFECTS</span><br>YOU', sub:'ASHRAE and OSHA guidelines: indoor CO₂ levels should not exceed 1,000 ppm.', badge:'ppm maintained by<br>DEFRO air', bar0:'✅ DEFRO — outdoor<br>norm', bar1:'Acceptable level<br>(ASHRAE/OSHA)', bar2:'Drowsiness, fatigue,<br>headache', bar3:'Serious health<br>impairments', bar4:'Maximum 8-hour<br>exposure limit' },
     feat: { h2:'TECHNICAL<br><span style="color:var(--blue-light)">ADVANTAGES</span>', hero1:{h4:'Heat Recovery',p:'The counter-flow heat exchanger recovers 95% of the heat from outgoing air. Heating savings are noticeable from the first month.'}, hero2:{h4:'HEPA 13 Filtration',p:'Captures PM2.5, allergens, bacteria and smog particles. Indoor air is cleaner than outdoor air in Bishkek.'}, s1:{h4:'Humidification',p:'Maintains 40–60% — the only safe humidity range for health and immunity'}, s2:{h4:'WiFi Control',p:'Full remote control via app from anywhere in the world'}, s3:{h4:'Class A',p:'EC fans from 100 W. Minimal energy consumption'}, s4:{h4:'Flow Balancing',p:'Automatic airflow balancing reduces heating costs'}, s5:{h4:'Silent Operation',p:'From 41 dB — runs continuously and is inaudible even at night'}, s6:{h4:'Antibacterial Coating',p:'Duct coating prevents the growth of mould and microorganisms'} },
     compare: { h2:'WHY<br><span style="color:var(--blue-light)">DEFRO?</span>', th0:'Ventilation Type', th1:'Humidification', th2:'Heat Recovery', th3:'Filtration', th4:'Control', th5:'Noise', th6:'Energy', th7:'Total', row0:'Window', row1:'Supply Valve', row2:'Breezer', row3:'DEFRO air', high:'High', mid:'Medium', low:'Low', highE:'High', lowA:'Low Class A' },
