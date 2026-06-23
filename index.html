@@ -459,6 +459,11 @@ h3 {
 .city-chart-legend { display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap; }
 .city-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
 .city-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.chart-toggle { display: flex; gap: 0; margin-bottom: 18px; }
+.chart-toggle-btn { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; padding: 7px 16px; cursor: pointer; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.35); transition: background 0.2s, color 0.2s, border-color 0.2s; }
+.chart-toggle-btn:first-child { border-right: none; }
+.chart-toggle-btn.active { background: rgba(79,179,232,0.12); color: var(--blue-light); border-color: rgba(79,179,232,0.4); }
+.chart-toggle-btn.active-winter { background: rgba(232,64,64,0.12); color: #e84040; border-color: rgba(232,64,64,0.4); }
 /* health effects */
 .health-header { text-align: center; margin-bottom: 56px; }
 .health-header p { font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.55); max-width: 620px; margin: 20px auto 0; }
@@ -1228,47 +1233,51 @@ footer { background: #040507; border-top: 1px solid var(--border); }
 
       <!-- Right: city comparison chart -->
       <div class="reveal-right">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--blue-light);margin-bottom:20px" data-i18n="filt.chart.title">PM2.5 · мкг/м³ · среднегодовой</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px">PM2.5 · мкг/м³</div>
+        <div class="chart-toggle">
+          <button class="chart-toggle-btn active" id="btn-annual" onclick="switchCityChart('annual')">Среднегодовой</button>
+          <button class="chart-toggle-btn" id="btn-winter" onclick="switchCityChart('winter')">Зимой</button>
+        </div>
         <div class="city-chart" id="city-chart">
           <div class="city-row">
             <div class="city-label" style="color:rgba(255,255,255,0.3)">ВОЗ норма</div>
-            <div class="city-track"><div class="city-fill c-who" data-city-width="5.4%"></div></div>
-            <div class="city-val" style="color:rgba(255,255,255,0.3)">5</div>
+            <div class="city-track"><div class="city-fill c-who" data-annual="5.4%" data-winter="2.3%"></div></div>
+            <div class="city-val" style="color:rgba(255,255,255,0.3)" data-annual-val="5" data-winter-val="5">5</div>
           </div>
           <div class="city-row">
             <div class="city-label">Берлин</div>
-            <div class="city-track"><div class="city-fill c-ok" data-city-width="11.8%"></div></div>
-            <div class="city-val">11</div>
+            <div class="city-track"><div class="city-fill c-ok" data-annual="11.8%" data-winter="6.4%"></div></div>
+            <div class="city-val" data-annual-val="11" data-winter-val="14">11</div>
           </div>
           <div class="city-row">
             <div class="city-label">Москва</div>
-            <div class="city-track"><div class="city-fill c-ok" data-city-width="12.9%"></div></div>
-            <div class="city-val">12</div>
+            <div class="city-track"><div class="city-fill c-ok" data-annual="12.9%" data-winter="8.2%"></div></div>
+            <div class="city-val" data-annual-val="12" data-winter-val="18">12</div>
           </div>
           <div class="city-row">
             <div class="city-label">Стамбул</div>
-            <div class="city-track"><div class="city-fill c-mid" data-city-width="22.6%"></div></div>
-            <div class="city-val">21</div>
+            <div class="city-track"><div class="city-fill c-mid" data-annual="22.6%" data-winter="17.3%"></div></div>
+            <div class="city-val" data-annual-val="21" data-winter-val="38">21</div>
           </div>
           <div class="city-row">
             <div class="city-label">Каир</div>
-            <div class="city-track"><div class="city-fill c-high" data-city-width="51.6%"></div></div>
-            <div class="city-val">48</div>
+            <div class="city-track"><div class="city-fill c-high" data-annual="51.6%" data-winter="31.8%"></div></div>
+            <div class="city-val" data-annual-val="48" data-winter-val="70">48</div>
           </div>
           <div class="city-row">
             <div class="city-label highlight">Бишкек ⚠</div>
-            <div class="city-track"><div class="city-fill c-danger" data-city-width="53.8%"></div></div>
-            <div class="city-val highlight">50</div>
+            <div class="city-track"><div class="city-fill c-danger" data-annual="53.8%" data-winter="100%"></div></div>
+            <div class="city-val highlight" data-annual-val="50" data-winter-val="220">50</div>
           </div>
           <div class="city-row">
             <div class="city-label">Лахор</div>
-            <div class="city-track"><div class="city-fill c-danger" style="opacity:0.55" data-city-width="93.5%"></div></div>
-            <div class="city-val">87</div>
+            <div class="city-track"><div class="city-fill c-danger" style="opacity:0.55" data-annual="93.5%" data-winter="86.4%"></div></div>
+            <div class="city-val" data-annual-val="87" data-winter-val="190">87</div>
           </div>
           <div class="city-row">
             <div class="city-label">Дели</div>
-            <div class="city-track"><div class="city-fill c-danger" style="opacity:0.55" data-city-width="100%"></div></div>
-            <div class="city-val">93</div>
+            <div class="city-track"><div class="city-fill c-danger" style="opacity:0.55" data-annual="100%" data-winter="90.9%"></div></div>
+            <div class="city-val" data-annual-val="93" data-winter-val="200">93</div>
           </div>
         </div>
         <div class="filt-source" style="margin-top:12px" data-i18n="filt.source">Источник: IQAir World Air Quality Report 2019–2023</div>
@@ -1794,13 +1803,26 @@ document.querySelectorAll('.co2-bar-fill').forEach(bar => {
 });
 
 // ── City chart bars ──
-document.querySelectorAll('.city-fill').forEach(bar => {
-  const w = bar.dataset.cityWidth;
-  ScrollTrigger.create({
-    trigger: bar, start: 'top 85%', once: true,
-    onEnter() { gsap.to(bar, { width: w, duration: 1.2, ease: 'power3.out' }); }
+let cityChartAnimated = false;
+let cityChartMode = 'annual';
+function animateCityBars(mode) {
+  document.querySelectorAll('.city-fill').forEach(bar => {
+    gsap.to(bar, { width: bar.dataset[mode === 'winter' ? 'winter' : 'annual'], duration: 1.0, ease: 'power3.out' });
   });
+  document.querySelectorAll('.city-val').forEach(val => {
+    val.textContent = val.dataset[mode === 'winter' ? 'winterVal' : 'annualVal'];
+  });
+}
+ScrollTrigger.create({
+  trigger: '#city-chart', start: 'top 85%', once: true,
+  onEnter() { cityChartAnimated = true; animateCityBars('annual'); }
 });
+window.switchCityChart = function(mode) {
+  cityChartMode = mode;
+  document.getElementById('btn-annual').className = 'chart-toggle-btn' + (mode === 'annual' ? ' active' : '');
+  document.getElementById('btn-winter').className = 'chart-toggle-btn' + (mode === 'winter' ? ' active-winter' : '');
+  if (cityChartAnimated) animateCityBars(mode);
+};
 
 // ── Stagger animations ──
 gsap.from('.about-num-card', {
