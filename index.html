@@ -112,7 +112,7 @@ nav.scrolled {
 /* ── VIDEO JOURNEY ── */
 #journey {
   position: relative;
-  height: 900vh;
+  height: 1800vh;
 }
 #journey-sticky {
   position: sticky;
@@ -1527,7 +1527,7 @@ function updateJourney(progress) {
   scrollHint.style.opacity = Math.max(0, 1 - progress / 0.04);
 
   chapters.forEach((ch, i) => {
-    const isActive = progress >= ch.from && progress < ch.to;
+    const isActive = progress > 0.001 && progress >= ch.from && progress < ch.to;
     const el = document.getElementById('j-o' + i);
     if (el) el.classList.toggle('active', isActive);
     if (dots[i]) dots[i].classList.toggle('active', isActive);
