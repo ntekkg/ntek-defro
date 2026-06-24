@@ -120,6 +120,7 @@ nav.scrolled {
   height: 100vh;
   overflow: hidden;
   background: #000;
+  pointer-events: none;
 }
 #journey-canvas {
   position: absolute;
@@ -148,6 +149,7 @@ nav.scrolled {
   backdrop-filter: blur(6px);
   transition: background 0.2s, color 0.2s;
   white-space: nowrap;
+  pointer-events: auto;
 }
 #skip-animation:hover { background: rgba(255,255,255,0.16); color: #fff; }
 #journey-loader {
@@ -1210,12 +1212,11 @@ footer { background: #040507; border-top: 1px solid var(--border); }
     <li><a href="#how" data-i18n="nav.how">Принцип работы</a></li>
     <li><a href="#features" data-i18n="nav.features">Преимущества</a></li>
     <li><a href="#compare" data-i18n="nav.compare">Сравнение</a></li>
-    <li><a href="#testimonials" data-i18n="nav.reviews">Отзывы</a></li>
   </ul>
   <div class="lang-switcher">
-    <button class="lang-btn active" onclick="switchLang('ru')">RU</button>
-    <button class="lang-btn" onclick="switchLang('ky')">KY</button>
-    <button class="lang-btn" onclick="switchLang('en')">EN</button>
+    <button class="lang-btn active" data-lang="ru">RU</button>
+    <button class="lang-btn" data-lang="ky">KY</button>
+    <button class="lang-btn" data-lang="en">EN</button>
   </div>
   <button class="nav-cta" data-i18n="nav.cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Связаться с нами</button>
 </nav>
@@ -2559,6 +2560,11 @@ function switchLang(lang) {
     if (val !== null) el.innerHTML = val;
   });
 }
+
+// Lang button listeners
+document.querySelectorAll('.lang-btn[data-lang]').forEach(btn => {
+  btn.addEventListener('click', () => switchLang(btn.dataset.lang));
+});
 
 // Init: restore saved language
 (function() {
