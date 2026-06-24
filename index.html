@@ -522,7 +522,7 @@ h3 {
 input[type=range].recov-range { -webkit-appearance: none; width: 100%; height: 2px; border-radius: 2px; outline: none; cursor: pointer; transition: background 0.3s; }
 input[type=range].recov-range::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--bg); cursor: pointer; transition: background 0.3s; background: var(--blue-light); }
 .recov-viz { background: var(--surface); border: 1px solid var(--border); overflow: hidden; margin-bottom: 32px; }
-.recov-viz-grid { display: grid; grid-template-columns: 110px 1fr 160px 1fr 110px; grid-template-rows: 84px; }
+.recov-viz-grid { display: grid; grid-template-columns: 110px 1fr 160px 1fr 110px; grid-template-rows: 84px 84px; }
 .rv-node { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; }
 .rv-node-temp { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 24px; transition: color 0.35s; line-height: 1; }
 .rv-node-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 4px; text-align: center; }
@@ -569,7 +569,7 @@ input[type=range].recov-range::-webkit-slider-thumb { -webkit-appearance: none; 
   .recov-big95 { font-size: 72px; text-align: left; }
   .recov-kpi-row { grid-template-columns: 1fr; }
   .recov-ctrl-row { flex-direction: column; align-items: center; gap: 28px; }
-  .recov-viz-grid { grid-template-columns: 70px 1fr 120px 1fr 70px; grid-template-rows: 72px; }
+  .recov-viz-grid { grid-template-columns: 70px 1fr 120px 1fr 70px; grid-template-rows: 72px 72px; }
   .rv-hx-eff { font-size: 26px; }
   .rv-node-temp { font-size: 18px; }
   .recov-result-main { font-size: 64px; }
@@ -1621,7 +1621,7 @@ footer { background: #040507; border-top: 1px solid var(--border); }
             <div class="rv-track-line" id="rv-line-s1" style="background:rgba(79,179,232,0.2)"></div>
             <div class="rv-track-pulse" id="rv-pulse-s1" style="background:linear-gradient(90deg,transparent,rgba(79,179,232,0.85),transparent);animation:rv-flow-r 1.4s linear infinite"></div>
           </div>
-          <div class="rv-hx" style="grid-column:3;grid-row:1">
+          <div class="rv-hx" style="grid-column:3;grid-row:1/3">
             <div class="rv-hx-eff">95%</div>
             <div class="rv-hx-title" data-i18n="recov.kpi1">КПД</div>
             <div class="rv-hx-sub" data-i18n="recov.viz.hxsub">DEFRO · теплообменник</div>
@@ -1634,9 +1634,32 @@ footer { background: #040507; border-top: 1px solid var(--border); }
             <div class="rv-node-temp" id="rv-temp-res" style="color:#ff6b35">+22°C</div>
             <div class="rv-node-label" data-i18n="recov.viz.result">ПОСЛЕ ОБМЕНА</div>
           </div>
+          <!-- Exhaust row: indoor → HX → exhaust-out (reverse direction) -->
+          <div class="rv-node rv-exhaust-border" style="grid-column:1;grid-row:2">
+            <div class="rv-node-temp" id="rv-temp-exhout" style="color:#4fb3e8">−15°C</div>
+            <div class="rv-node-label" data-i18n="recov.viz.exhaust">ВЫТЯЖНОЙ</div>
+          </div>
+          <div class="rv-track rv-exhaust-border" style="grid-column:2;grid-row:2;overflow:hidden">
+            <div class="rv-track-line" style="background:rgba(79,179,232,0.15)"></div>
+            <div class="rv-track-pulse" style="background:linear-gradient(90deg,transparent,rgba(79,179,232,0.6),transparent);animation:rv-flow-l 1.4s linear infinite;right:-45%;left:auto"></div>
+          </div>
+          <div class="rv-track rv-exhaust-border" style="grid-column:4;grid-row:2;overflow:hidden">
+            <div class="rv-track-line" style="background:rgba(255,107,53,0.15)"></div>
+            <div class="rv-track-pulse" style="background:linear-gradient(90deg,transparent,rgba(255,107,53,0.6),transparent);animation:rv-flow-l 1.4s linear infinite 0.4s;right:-45%;left:auto"></div>
+          </div>
+          <div class="rv-node rv-exhaust-border" style="grid-column:5;grid-row:2">
+            <div class="rv-node-temp" id="rv-temp-in" style="color:#ff6b35">+24°C</div>
+            <div class="rv-node-label" data-i18n="recov.viz.inside">В ДОМЕ</div>
+          </div>
         </div>
       </div>
 
+    </div>
+
+    <!-- Big result number -->
+    <div class="recov-result-box" style="margin-bottom:32px">
+      <div class="recov-result-main" id="rv-result-big" style="color:#ff6b35">+22°C</div>
+      <div class="recov-result-rlabel" data-i18n="recov.viz.rlabel">температура приточного воздуха после теплообмена</div>
     </div>
 
     <!-- Pillars row -->
@@ -2323,6 +2346,7 @@ window.switchCityChart = function(mode) {
   function fmtT(t) { return (t > 0 ? '+' : '') + t + '°C'; }
 
   function calcResult(tIn, tOut) { return Math.round(tOut + 0.95 * (tIn - tOut)); }
+  function calcExhaust(tIn, tOut) { return Math.round(tIn - 0.95 * (tIn - tOut)); }
 
   function setTrackColor(pulseEl, lineEl, color, alpha1, alpha2) {
     const rgb = color.replace('rgb(','').replace(')','');
@@ -2334,10 +2358,12 @@ window.switchCityChart = function(mode) {
     const tIn = parseInt(document.getElementById('recov-indoor').value);
     const tOut = parseInt(document.getElementById('recov-outdoor').value);
     const tRes = calcResult(tIn, tOut);
+    const tExh = calcExhaust(tIn, tOut);
 
     const cOut = tempColor(tOut);
     const cIn  = tempColor(tIn);
     const cRes = tempColor(tRes);
+    const cExh = tempColor(tExh);
 
     document.getElementById('recov-indoor-val').textContent  = fmtT(tIn);
     document.getElementById('recov-outdoor-val').textContent = fmtT(tOut);
@@ -2347,10 +2373,17 @@ window.switchCityChart = function(mode) {
     document.getElementById('recov-indoor').style.setProperty('--thumb-color', cIn);
     document.getElementById('recov-outdoor').style.setProperty('--thumb-color', cOut);
 
-    document.getElementById('rv-temp-out').textContent = fmtT(tOut);
-    document.getElementById('rv-temp-out').style.color = cOut;
-    document.getElementById('rv-temp-res').textContent = fmtT(tRes);
-    document.getElementById('rv-temp-res').style.color = cRes;
+    document.getElementById('rv-temp-out').textContent     = fmtT(tOut);
+    document.getElementById('rv-temp-out').style.color     = cOut;
+    document.getElementById('rv-temp-res').textContent     = fmtT(tRes);
+    document.getElementById('rv-temp-res').style.color     = cRes;
+    document.getElementById('rv-temp-in').textContent      = fmtT(tIn);
+    document.getElementById('rv-temp-in').style.color      = cIn;
+    document.getElementById('rv-temp-exhout').textContent  = fmtT(tExh);
+    document.getElementById('rv-temp-exhout').style.color  = cExh;
+
+    document.getElementById('rv-result-big').textContent   = fmtT(tRes);
+    document.getElementById('rv-result-big').style.color   = cRes;
 
     const extractRgb = c => c.replace('rgb(','').replace(')','');
     document.getElementById('rv-pulse-s1').style.background = `linear-gradient(90deg,transparent,rgba(${extractRgb(cOut)},0.85),transparent)`;
