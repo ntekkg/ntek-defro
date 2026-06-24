@@ -481,11 +481,17 @@ h3 {
 .city-fill.c-mid { background: linear-gradient(to right, #2980b9, #3498db); }
 .city-fill.c-ok { background: linear-gradient(to right, #27ae60, #2ecc71); }
 .city-fill.c-who { background: linear-gradient(to right, #1a6faa, #4fb3e8); }
-.city-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.35; }
-.city-desc.highlight { color: rgba(232,64,64,0.8); }
+.city-desc { display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.35; }
+.city-desc-text { flex: 1; }
+.city-desc-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; flex-shrink: 0; }
+.city-desc.col-who { color: var(--blue-light); }
+.city-desc.col-ok { color: #2ecc71; }
+.city-desc.col-mid { color: #3498db; }
+.city-desc.col-high { color: #f39c12; }
+.city-desc.col-danger, .city-desc.highlight { color: #e84040; }
+.city-desc.col-dim { color: rgba(232,64,64,0.55); }
 .city-row-who { background: rgba(79,179,232,0.07); outline: 1px solid rgba(79,179,232,0.25); border-radius: 2px; padding: 4px 6px; margin: 0 -6px; }
 .city-row-who .city-label { color: var(--blue-light) !important; font-weight: 700; }
-.city-row-who .city-val { color: var(--blue-light) !important; font-weight: 800; }
 .city-chart-legend { display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap; }
 .city-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
 .city-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
@@ -1479,42 +1485,69 @@ footer { background: #040507; border-top: 1px solid var(--border); }
           <div class="city-row city-row-who">
             <div class="city-label" data-i18n="filt.chart.who">ВОЗ норма</div>
             <div class="city-track"><div class="city-fill c-who" data-annual="5.4%" data-winter="2.3%"></div></div>
-            <div class="city-desc" data-i18n="filt.cities.d_who">рекомендуемый предел</div>
+            <div class="city-desc col-who">
+              <span class="city-desc-text" data-i18n="filt.cities.d_who">рекомендуемый предел</span>
+              <span class="city-desc-num" data-annual-val="5" data-winter-val="5">5</span>
+            </div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.berlin">Берлин</div>
             <div class="city-track"><div class="city-fill c-ok" data-annual="11.8%" data-winter="6.4%"></div></div>
-            <div class="city-desc" data-i18n="filt.cities.d_ok">норма соблюдается</div>
+            <div class="city-desc col-ok">
+              <span class="city-desc-text" data-i18n="filt.cities.d_ok">норма соблюдается</span>
+              <span class="city-desc-num" data-annual-val="11" data-winter-val="14">11</span>
+            </div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.moscow">Москва</div>
             <div class="city-track"><div class="city-fill c-ok" data-annual="12.9%" data-winter="8.2%"></div></div>
-            <div class="city-desc" data-i18n="filt.cities.d_ok">норма соблюдается</div>
+            <div class="city-desc col-ok">
+              <span class="city-desc-text" data-i18n="filt.cities.d_ok">норма соблюдается</span>
+              <span class="city-desc-num" data-annual-val="12" data-winter-val="18">12</span>
+            </div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.istanbul">Стамбул</div>
             <div class="city-track"><div class="city-fill c-mid" data-annual="22.6%" data-winter="17.3%"></div></div>
-            <div class="city-desc" data-i18n="filt.cities.d_mid">умеренное загрязнение</div>
+            <div class="city-desc col-mid">
+              <span class="city-desc-text" data-i18n="filt.cities.d_mid">умеренное загрязнение</span>
+              <span class="city-desc-num" data-annual-val="21" data-winter-val="38">21</span>
+            </div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.cairo">Каир</div>
             <div class="city-track"><div class="city-fill c-high" data-annual="51.6%" data-winter="31.8%"></div></div>
-            <div class="city-desc" data-i18n="filt.cities.d_high">высокое загрязнение</div>
+            <div class="city-desc col-high">
+              <span class="city-desc-text" data-i18n="filt.cities.d_high">высокое загрязнение</span>
+              <span class="city-desc-num" data-annual-val="48" data-winter-val="70">48</span>
+            </div>
           </div>
           <div class="city-row">
             <div class="city-label highlight" data-i18n="filt.cities.bishkek">Бишкек</div>
             <div class="city-track"><div class="city-fill c-danger" data-annual="53.8%" data-winter="100%"></div></div>
-            <div class="city-desc highlight" data-i18n="filt.cities.d_danger">×10 выше нормы ВОЗ</div>
+            <div class="city-desc col-danger">
+              <span class="city-desc-text"
+                data-annual-ru="×10 выше нормы ВОЗ" data-winter-ru="критический уровень"
+                data-annual-ky="ВОЗ нормасынан ×10 жогору" data-winter-ky="критикалык деңгээл"
+                data-annual-en="×10 above WHO limit" data-winter-en="critical level">×10 выше нормы ВОЗ</span>
+              <span class="city-desc-num" data-annual-val="50" data-winter-val="220">50</span>
+            </div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.lahore">Лахор</div>
             <div class="city-track"><div class="city-fill c-danger" style="opacity:0.55" data-annual="93.5%" data-winter="86.4%"></div></div>
-            <div class="city-desc" data-i18n="filt.cities.d_critical">критический уровень</div>
+            <div class="city-desc col-dim">
+              <span class="city-desc-text" data-i18n="filt.cities.d_critical">критический уровень</span>
+              <span class="city-desc-num" data-annual-val="87" data-winter-val="190">87</span>
+            </div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.delhi">Дели</div>
             <div class="city-track"><div class="city-fill c-danger" style="opacity:0.55" data-annual="100%" data-winter="90.9%"></div></div>
-            <div class="city-desc" data-i18n="filt.cities.d_critical">критический уровень</div>
+            <div class="city-desc col-dim">
+              <span class="city-desc-text" data-i18n="filt.cities.d_critical">критический уровень</span>
+              <span class="city-desc-num" data-annual-val="93" data-winter-val="200">93</span>
+            </div>
           </div>
         </div>
         <div class="filt-source" style="margin-top:12px" data-i18n="filt.source">Источник: IQAir World Air Quality Report 2019–2023</div>
@@ -2266,10 +2299,18 @@ document.querySelectorAll('.co2-bar-fill').forEach(bar => {
 
 // ── City chart bars ──
 let cityChartAnimated = false;
-let cityChartMode = 'annual';
+window.cityChartMode = 'annual';
 function animateCityBars(mode) {
   document.querySelectorAll('.city-fill').forEach(bar => {
     gsap.to(bar, { width: bar.dataset[mode === 'winter' ? 'winter' : 'annual'], duration: 1.0, ease: 'power3.out' });
+  });
+  document.querySelectorAll('.city-desc-num').forEach(el => {
+    el.textContent = el.dataset[mode === 'winter' ? 'winterVal' : 'annualVal'];
+  });
+  const lang = window.__lang || 'ru';
+  document.querySelectorAll('.city-desc-text[data-annual-ru]').forEach(el => {
+    const key = mode + lang.charAt(0).toUpperCase() + lang.slice(1);
+    el.textContent = el.dataset[key] || el.dataset[mode + 'Ru'] || el.textContent;
   });
 }
 ScrollTrigger.create({
@@ -2277,7 +2318,7 @@ ScrollTrigger.create({
   onEnter() { cityChartAnimated = true; animateCityBars('annual'); }
 });
 window.switchCityChart = function(mode) {
-  cityChartMode = mode;
+  window.cityChartMode = mode;
   document.getElementById('btn-annual').className = 'chart-toggle-btn' + (mode === 'annual' ? ' active' : '');
   document.getElementById('btn-winter').className = 'chart-toggle-btn' + (mode === 'winter' ? ' active-winter' : '');
   if (cityChartAnimated) animateCityBars(mode);
@@ -2599,6 +2640,11 @@ function switchLang(lang) {
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     const val = getVal(t, el.dataset.i18nHtml);
     if (val !== null) el.innerHTML = val;
+  });
+  const mode = window.cityChartMode || 'annual';
+  document.querySelectorAll('.city-desc-text[data-annual-ru]').forEach(el => {
+    const key = mode + lang.charAt(0).toUpperCase() + lang.slice(1);
+    el.textContent = el.dataset[key] || el.dataset[mode + 'Ru'] || el.textContent;
   });
 }
 
