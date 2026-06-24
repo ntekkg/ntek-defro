@@ -1089,10 +1089,12 @@ footer { background: #040507; border-top: 1px solid var(--border); }
   color: rgba(255,255,255,0.45); font-family: 'Barlow', sans-serif;
   font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
   text-transform: uppercase; padding: 5px 8px;
-  transition: color 0.2s, border-color 0.2s;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  pointer-events: auto !important;
+  position: relative; z-index: 202;
 }
 .lang-btn:hover { color: var(--white); }
-.lang-btn.active { color: var(--blue-light); border-color: rgba(79,179,232,0.35); }
+.lang-btn.active { color: #fff; background: var(--blue-light); border-color: var(--blue-light); }
 .lang-btn:active { transform: scale(0.97); }
 
 /* ═══════════════════════════════════════
