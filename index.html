@@ -2097,11 +2097,14 @@ window.switchCityChart = function(mode) {
 
 // ── Humidity gauge ──
 (function() {
+  const gauge = document.getElementById('humid-gauge');
   const needle = document.getElementById('humid-needle');
   const labelEl = document.getElementById('humid-needle-label');
   const statusEl = document.getElementById('humid-needle-status');
-  if (!needle) return;
+  if (!needle || !gauge) return;
+
   function setNeedle(pct) {
+    pct = Math.max(0, Math.min(100, pct));
     needle.style.left = pct + '%';
     if (labelEl) labelEl.textContent = Math.round(pct) + '%';
     if (statusEl) {
@@ -2117,20 +2120,56 @@ window.switchCityChart = function(mode) {
       }
     }
   }
+
+  // Draggable
+  needle.style.cursor = 'grab';
+  needle.style.touchAction = 'none';
+  let dragging = false;
+  let activeAnim = null;
+
+  function pctFromX(clientX) {
+    const rect = gauge.getBoundingClientRect();
+    return (clientX - rect.left) / rect.width * 100;
+  }
+
+  needle.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    if (activeAnim) { activeAnim.kill(); activeAnim = null; }
+    needle.setPointerCapture(e.pointerId);
+    needle.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  needle.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    setNeedle(pctFromX(e.clientX));
+  });
+  needle.addEventListener('pointerup', () => {
+    dragging = false;
+    needle.style.cursor = 'grab';
+  });
+
+  // Click anywhere on track to jump needle there
+  gauge.addEventListener('click', (e) => {
+    if (dragging) return;
+    if (activeAnim) { activeAnim.kill(); }
+    const target = pctFromX(e.clientX);
+    const obj = { v: parseFloat(needle.style.left) || 20 };
+    activeAnim = gsap.to(obj, {
+      v: target, duration: 0.5, ease: 'power2.out',
+      onUpdate() { setNeedle(obj.v); }
+    });
+  });
+
+  // Initial animation on scroll
   setNeedle(20);
   ScrollTrigger.create({
     trigger: '#humid-gauge', start: 'top 80%', once: true,
     onEnter() {
       const obj = { v: 20 };
-      gsap.to(obj, {
-        v: 20, duration: 0.8, ease: 'none',
-        onUpdate() { setNeedle(obj.v); },
-        onComplete() {
-          gsap.to(obj, {
-            v: 50, duration: 2.5, delay: 0.6, ease: 'power2.inOut',
-            onUpdate() { setNeedle(obj.v); }
-          });
-        }
+      activeAnim = gsap.to(obj, {
+        v: 50, duration: 2.5, delay: 0.5, ease: 'power2.inOut',
+        onUpdate() { if (!dragging) setNeedle(obj.v); },
+        onComplete() { activeAnim = null; }
       });
     }
   });
