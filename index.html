@@ -423,11 +423,11 @@ h3 {
   position: absolute; top: 20px; right: 24px;
 }
 .step-icon { font-size: 36px; margin-bottom: 20px; }
-.how-step { display: flex; flex-direction: column; }
+.how-step { display: flex; flex-direction: column; min-height: 400px; }
 .how-step h3 { font-size: 22px; margin-bottom: 16px; }
 .how-step p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7; }
 .how-step-cta {
-  display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 24px; align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 8px; margin-top: auto; align-self: flex-start;
   padding: 10px 22px; font-family: 'Barlow', sans-serif; font-size: 11px;
   font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
   color: var(--blue-light); border: 1px solid rgba(79,179,232,0.35);
@@ -471,7 +471,7 @@ h3 {
 .filt-source { font-size: 11px; color: rgba(255,255,255,0.28); letter-spacing: 1px; margin-top: 28px; }
 /* city chart */
 .city-chart { display: flex; flex-direction: column; gap: 10px; }
-.city-row { display: grid; grid-template-columns: 130px 1fr 56px; gap: 12px; align-items: center; }
+.city-row { display: grid; grid-template-columns: 130px 1fr 180px; gap: 12px; align-items: center; }
 .city-label { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; color: rgba(255,255,255,0.65); text-align: right; }
 .city-label.highlight { color: #e84040; font-weight: 700; }
 .city-track { height: 28px; background: rgba(255,255,255,0.04); position: relative; overflow: hidden; border-radius: 2px; }
@@ -481,8 +481,8 @@ h3 {
 .city-fill.c-mid { background: linear-gradient(to right, #2980b9, #3498db); }
 .city-fill.c-ok { background: linear-gradient(to right, #27ae60, #2ecc71); }
 .city-fill.c-who { background: linear-gradient(to right, #1a6faa, #4fb3e8); }
-.city-val { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5); }
-.city-val.highlight { color: #e84040; }
+.city-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.35; }
+.city-desc.highlight { color: rgba(232,64,64,0.8); }
 .city-row-who { background: rgba(79,179,232,0.07); outline: 1px solid rgba(79,179,232,0.25); border-radius: 2px; padding: 4px 6px; margin: 0 -6px; }
 .city-row-who .city-label { color: var(--blue-light) !important; font-weight: 700; }
 .city-row-who .city-val { color: var(--blue-light) !important; font-weight: 800; }
@@ -522,12 +522,13 @@ h3 {
   .filt-split { grid-template-columns: 1fr; gap: 48px; }
   .health-grid { grid-template-columns: repeat(2, 1fr); }
   .hepa-callout { grid-template-columns: 1fr; gap: 36px; padding: 40px 32px; }
-  .city-row { grid-template-columns: 100px 1fr 50px; }
+  .city-row { grid-template-columns: 100px 1fr 130px; }
 }
 @media (max-width: 600px) {
   .health-grid { grid-template-columns: 1fr; }
-  .city-row { grid-template-columns: 80px 1fr 44px; }
+  .city-row { grid-template-columns: 70px 1fr; }
   .city-label { font-size: 11px; }
+  .city-desc { display: none; }
 }
 
 /* ── RECOVERY ── */
@@ -1478,42 +1479,42 @@ footer { background: #040507; border-top: 1px solid var(--border); }
           <div class="city-row city-row-who">
             <div class="city-label" data-i18n="filt.chart.who">ВОЗ норма</div>
             <div class="city-track"><div class="city-fill c-who" data-annual="5.4%" data-winter="2.3%"></div></div>
-            <div class="city-val" data-annual-val="5" data-winter-val="5">5</div>
+            <div class="city-desc" data-i18n="filt.cities.d_who">рекомендуемый предел</div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.berlin">Берлин</div>
             <div class="city-track"><div class="city-fill c-ok" data-annual="11.8%" data-winter="6.4%"></div></div>
-            <div class="city-val" data-annual-val="11" data-winter-val="14">11</div>
+            <div class="city-desc" data-i18n="filt.cities.d_ok">норма соблюдается</div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.moscow">Москва</div>
             <div class="city-track"><div class="city-fill c-ok" data-annual="12.9%" data-winter="8.2%"></div></div>
-            <div class="city-val" data-annual-val="12" data-winter-val="18">12</div>
+            <div class="city-desc" data-i18n="filt.cities.d_ok">норма соблюдается</div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.istanbul">Стамбул</div>
             <div class="city-track"><div class="city-fill c-mid" data-annual="22.6%" data-winter="17.3%"></div></div>
-            <div class="city-val" data-annual-val="21" data-winter-val="38">21</div>
+            <div class="city-desc" data-i18n="filt.cities.d_mid">умеренное загрязнение</div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.cairo">Каир</div>
             <div class="city-track"><div class="city-fill c-high" data-annual="51.6%" data-winter="31.8%"></div></div>
-            <div class="city-val" data-annual-val="48" data-winter-val="70">48</div>
+            <div class="city-desc" data-i18n="filt.cities.d_high">высокое загрязнение</div>
           </div>
           <div class="city-row">
             <div class="city-label highlight" data-i18n="filt.cities.bishkek">Бишкек</div>
             <div class="city-track"><div class="city-fill c-danger" data-annual="53.8%" data-winter="100%"></div></div>
-            <div class="city-val highlight" data-annual-val="50" data-winter-val="220">50</div>
+            <div class="city-desc highlight" data-i18n="filt.cities.d_danger">×10 выше нормы ВОЗ</div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.lahore">Лахор</div>
             <div class="city-track"><div class="city-fill c-danger" style="opacity:0.55" data-annual="93.5%" data-winter="86.4%"></div></div>
-            <div class="city-val" data-annual-val="87" data-winter-val="190">87</div>
+            <div class="city-desc" data-i18n="filt.cities.d_critical">критический уровень</div>
           </div>
           <div class="city-row">
             <div class="city-label" data-i18n="filt.cities.delhi">Дели</div>
             <div class="city-track"><div class="city-fill c-danger" style="opacity:0.55" data-annual="100%" data-winter="90.9%"></div></div>
-            <div class="city-val" data-annual-val="93" data-winter-val="200">93</div>
+            <div class="city-desc" data-i18n="filt.cities.d_critical">критический уровень</div>
           </div>
         </div>
         <div class="filt-source" style="margin-top:12px" data-i18n="filt.source">Источник: IQAir World Air Quality Report 2019–2023</div>
@@ -2270,9 +2271,6 @@ function animateCityBars(mode) {
   document.querySelectorAll('.city-fill').forEach(bar => {
     gsap.to(bar, { width: bar.dataset[mode === 'winter' ? 'winter' : 'annual'], duration: 1.0, ease: 'power3.out' });
   });
-  document.querySelectorAll('.city-val').forEach(val => {
-    val.textContent = val.dataset[mode === 'winter' ? 'winterVal' : 'annualVal'];
-  });
 }
 ScrollTrigger.create({
   trigger: '#city-chart', start: 'top 85%', once: true,
@@ -2569,7 +2567,7 @@ const translations = {
     },
     about: { label:'About the Manufacturer', h2:'CLEAN AIR —<br><span style="color:var(--blue-light)">POLISH RELIABILITY</span>', p1:'Bishkek ranks among the world\'s top 10 most polluted cities. DEFRO air filters PM2.5, smog and bacteria at the point of entry — right at your home\'s wall.', p2:'DEFRO has manufactured ventilation equipment since 1973. Systems are certified to European standards and supplied to dozens of countries. NTEK is the official distributor in Kyrgyzstan.', num1:'Year founded in Poland', num2:'Production employees', num3:'Units produced per year', num4:'Energy efficiency class across the full range' },
     how: { h2:'HOW IT<br><span style="color:var(--blue-light)">WORKS</span>', s1:{h3:'Air Filtration',p:'HEPA 13 filters smog, PM2.5, odours and bacteria. Indoor air is cleaner than outside.',cta:'Learn more →'}, s2:{h3:'Heat Recovery',p:'The counter-flow heat exchanger recovers up to 95% of heat from exhaust air. Fresh air without heat loss or extra heating costs.',cta:'Learn more →'}, s3:{h3:'Air Humidification',p:'The system maintains 40–60% humidity — the optimal range for respiratory health and immunity.',cta:'Learn more →'} },
-    filt: { label:'About Air', h2:'AIR<br><span style="color:#e84040">FILTRATION</span>', sub:'Indoor air is 2–5× more polluted than outdoor air. In Bishkek it is far worse: the city ranks in the top 10 most polluted capitals in the world according to IQAir. Every breath without filtration carries smog, soot and heavy metal particles straight into the lungs.', stat:{sub:'times above WHO limit'}, body:'Bishkek\'s annual average PM2.5 level is <strong>~50 µg/m³</strong>. The WHO limit is <strong>5 µg/m³</strong>.<br><br>In winter, during the coal heating season, readings reach <strong>300–400 µg/m³</strong> — the "hazardous" band on the AQI scale. This is when people breathe the most polluted air right at home.<br><br>In 2019 IQAir declared Bishkek <strong>the most polluted capital city in the world</strong> by PM2.5 concentration.', source:'Source: IQAir World Air Quality Report 2019–2023', chart:{title:'PM2.5 · µg/m³ · annual average', unit:'PM2.5 · µg/m³', annual:'Annual average', winter:'Winter', who:'WHO limit'}, health:{label:'Health Effects', h2:'SMOG KILLS<br><span style="color:#e84040">SILENTLY</span>', sub:'PM2.5 particles are smaller than 2.5 micrometres in diameter — so tiny they pass through lung tissue into the bloodstream. The WHO recognises air pollution as the single greatest environmental health risk.'}, h:{lung:'Lungs', heart:'Heart', brain:'Brain', immune:'Immunity', children:'Children', sleep:'Sleep'}, p:{lung:'Chronic bronchitis, asthma, and COPD are direct consequences of long-term PM2.5 inhalation. Particles lodge permanently in the alveoli.', heart:'PM2.5 causes vascular inflammation, atherosclerosis and elevated heart-attack risk. Polluted air is one of the leading drivers of cardiovascular disease.', brain:'Research links chronic PM2.5 exposure to lower childhood IQ, dementia and Alzheimer\'s disease in adults.', immune:'Constant stress on the immune system leads to chronic fatigue, frequent colds and reduced protection against viruses.', children:'Children\'s lungs develop until age 18. Polluted air irreversibly slows lung tissue growth and raises asthma risk by 40%.', sleep:'Airborne toxins disrupt deep-sleep phases. Morning fatigue, headache and difficulty concentrating are symptoms of overnight air poisoning.'}, hepa:{label:'Solution', h3:'HEPA 13 — <em style="color:var(--blue-light);font-style:italic">the only</em><br>reliable protection', p:'HEPA 13 filters are a medical-grade standard. They capture 99.97% of particles 0.3 µm and larger. DEFRO air uses carbon-fibre filters that trap PM2.5, soot, allergens, bacteria and viruses.', b1:'of particles captured', b2:'minimum particle size', b3:'medical grade', cta:'Get a Quote'}, cities:{berlin:'Berlin', moscow:'Moscow', istanbul:'Istanbul', cairo:'Cairo', bishkek:'Bishkek', lahore:'Lahore', delhi:'Delhi'} },
+    filt: { label:'About Air', h2:'AIR<br><span style="color:#e84040">FILTRATION</span>', sub:'Indoor air is 2–5× more polluted than outdoor air. In Bishkek it is far worse: the city ranks in the top 10 most polluted capitals in the world according to IQAir. Every breath without filtration carries smog, soot and heavy metal particles straight into the lungs.', stat:{sub:'times above WHO limit'}, body:'Bishkek\'s annual average PM2.5 level is <strong>~50 µg/m³</strong>. The WHO limit is <strong>5 µg/m³</strong>.<br><br>In winter, during the coal heating season, readings reach <strong>300–400 µg/m³</strong> — the "hazardous" band on the AQI scale. This is when people breathe the most polluted air right at home.<br><br>In 2019 IQAir declared Bishkek <strong>the most polluted capital city in the world</strong> by PM2.5 concentration.', source:'Source: IQAir World Air Quality Report 2019–2023', chart:{title:'PM2.5 · µg/m³ · annual average', unit:'PM2.5 · µg/m³', annual:'Annual average', winter:'Winter', who:'WHO limit'}, health:{label:'Health Effects', h2:'SMOG KILLS<br><span style="color:#e84040">SILENTLY</span>', sub:'PM2.5 particles are smaller than 2.5 micrometres in diameter — so tiny they pass through lung tissue into the bloodstream. The WHO recognises air pollution as the single greatest environmental health risk.'}, h:{lung:'Lungs', heart:'Heart', brain:'Brain', immune:'Immunity', children:'Children', sleep:'Sleep'}, p:{lung:'Chronic bronchitis, asthma, and COPD are direct consequences of long-term PM2.5 inhalation. Particles lodge permanently in the alveoli.', heart:'PM2.5 causes vascular inflammation, atherosclerosis and elevated heart-attack risk. Polluted air is one of the leading drivers of cardiovascular disease.', brain:'Research links chronic PM2.5 exposure to lower childhood IQ, dementia and Alzheimer\'s disease in adults.', immune:'Constant stress on the immune system leads to chronic fatigue, frequent colds and reduced protection against viruses.', children:'Children\'s lungs develop until age 18. Polluted air irreversibly slows lung tissue growth and raises asthma risk by 40%.', sleep:'Airborne toxins disrupt deep-sleep phases. Morning fatigue, headache and difficulty concentrating are symptoms of overnight air poisoning.'}, hepa:{label:'Solution', h3:'HEPA 13 — <em style="color:var(--blue-light);font-style:italic">the only</em><br>reliable protection', p:'HEPA 13 filters are a medical-grade standard. They capture 99.97% of particles 0.3 µm and larger. DEFRO air uses carbon-fibre filters that trap PM2.5, soot, allergens, bacteria and viruses.', b1:'of particles captured', b2:'minimum particle size', b3:'medical grade', cta:'Get a Quote'}, cities:{berlin:'Berlin', moscow:'Moscow', istanbul:'Istanbul', cairo:'Cairo', bishkek:'Bishkek', lahore:'Lahore', delhi:'Delhi', d_who:'recommended limit', d_ok:'within safe range', d_mid:'moderate pollution', d_high:'high pollution', d_danger:'×10 above WHO limit', d_critical:'critical level'} },
     humid: { label:'Air Humidity', h2:'AIR<br><span style="color:var(--blue-light)">HUMIDIFICATION</span>', intro:'Indoor air is 2–5 times more polluted than outdoor air. In Bishkek it is far worse: the city ranks among the world\'s top 10 most polluted capitals according to IQAir. Without filtration, every breath brings smoke particles, soot and heavy metals directly into your lungs.', gauge:{ title:'Relative indoor air humidity', left:'← Too dry (below 40%)', center:'✓ Optimal (40–60%)', right:'Too humid (above 60%) →', status:{dry:'Dangerously dry · typical apartment in winter', ok:'✓ Optimal · DEFRO air', wet:'Too humid'} }, bish:{ sub:'Humidity in a typical Bishkek apartment in winter', p:'Central heating radiators warm cold outdoor air without adding any moisture. Cold air already contains little water — after heating to +22°C its <strong>relative humidity drops to 15–25%</strong>. That is desert level. At such dryness:', li1:'Nasal mucosa dries out and cracks within 2–3 hours', li2:'Viruses survive in the air 3–4 times longer', li3:'Children catch colds significantly more often', li4:'Skin, eyes and throat signal stress' }, dry:{ title:'Dry', pct:'Below 40% — danger zone', li1:'Nasal and throat mucosa dries out and cracks', li2:'Viruses and bacteria pass through the damaged barrier easily', li3:'Frequent colds, flu and bronchitis', li4:'Eye irritation, dry skin and chapped lips', li5:'Nosebleeds in children', li6:'Disrupted sleep due to dry airways', li7:'Static electricity; dust stays airborne' }, ok:{ title:'Optimal', pct:'40–60% — optimal zone', li1:'Mucosa functions as a protective barrier', li2:'Viruses settle quickly and lose activity', li3:'Easy breathing, comfortable sleep', li4:'Skin and eyes are not under stress', li5:'Children fall ill less; better concentration', li6:'Furniture and wooden surfaces do not crack', li7:'This is exactly what DEFRO air maintains' }, wet:{ title:'Humid', pct:'Above 60% — risk zone', li1:'Mould starts growing within 24–48 hours', li2:'House dust mites multiply rapidly', li3:'Mould spores and allergens in the air', li4:'Damage to finishes, furniture and structures', li5:'Persistent unpleasant odours', li6:'Respiratory infections, worsening asthma', li7:'Condensation on windows, damp corners' }, hh:{ label:'Health consequences', h2:'HOW HUMIDITY<br><span style="color:#e74c3c">DESTROYS IMMUNITY</span>', p:'Wrong humidity is constant stress for the body. It is invisible but accumulates every day.' }, health:{ drytag:'Dry air <40%', wettag:'Humid air >60%', h1:'Immune barrier', p1:'Nasal mucosa is the first line of defence. Below 40% humidity it dries out and cracks. Viruses and bacteria enter the bloodstream directly. This is why winter colds in Bishkek are the rule, not the exception.', h2:'Virus survival', p2:'Research shows: at 20–25% humidity, the influenza virus remains active for up to 8 hours in the air. At 50% — less than 1 hour. Dry air literally turns a room into a breeding ground for infection.', h3:'Allergens and mould', p3:'Mould spores and house dust mites are the most common asthma and allergy triggers. Both live and multiply only above 60% humidity. Controlling humidity means controlling allergies.', h4:'Respiratory infections', p4:'Warm humid air is an ideal environment for fungi and bacteria. Chronic bronchitis, sinusitis and pneumonia are more common in damp rooms. Especially dangerous for children and the elderly.' }, defro:{ label:'DEFRO solution', h3:'40–60% — <em style="color:var(--blue-light);font-style:italic">year-round,</em><br>automatically', p:'DEFRO air has a built-in humidifier with a porous membrane. Filtered water is sprayed onto the membrane — air passes through it and absorbs moisture. No bacteria in the vapour, no overflow. The system maintains the right level automatically.', b1:'optimal humidity', b2:'automatic control', b3:'days per year', cta:'Get a quote' } },
     recov: { label:'Heat Recovery', h2:'HEAT RECOVERY<br><span style="color:var(--blue-light)">WINTER & SUMMER</span>', sub:'Exhaust and supply air flow counter-currently through thin walls of the heat exchanger. Heat transfers — airstreams never mix. In winter, 95% of your heating energy stays inside. In summer — 95% of your AC cooling.', kpi1:'heat recovery efficiency', kpi2:'energy efficiency class', kpi3:'system power consumption 24/7', kpi4:'days of continuous operation', mode:{winter:'❄ Winter', summer:'☀ Summer'}, ctrl:{indoor:'Indoors', outdoor:'Outside'}, viz:{outside:'OUTSIDE', inside:'INDOORS', result:'AFTER EXCHANGE', exhaust:'EXHAUST', hxsub:'DEFRO · heat exchanger', rlabel:'supply air temperature after heat exchange'}, money:{label:'Energy Savings', h3:'FINANCIAL SAVINGS<br><span style="color:var(--blue-light)">= ENERGY EFFICIENCY</span>', p1:'The heat exchanger cuts the load on your boiler in winter and your AC in summer — by 95%. That\'s not an abstract claim: less energy consumed every hour means a lower electricity bill every month and fewer carbon emissions. A sealed home with DEFRO air maintains the same temperature at a fraction of the cost — a win for both the environment and your wallet.', summer:'On a hot day (+38°C outside), the heat exchanger pre-cools incoming air with cool exhaust air before it enters. The AC receives +23°C instead of +38°C — 40% less work, 40% lower bill every month.', s1:'of thermal / cooling energy returned indoors', s2:'consumption vs 2 kW space heater', s3:'year-round operation — winter and summer', s4:'system energy efficiency class'}, summer:{h4:'Summer: same logic', p:'On a hot day (+38°C outside), DEFRO air pre-cools incoming air with cool exhaust air from the room before it enters. The AC receives +23°C instead of +38°C — consuming far less energy.'}, pillar1:{t:'Filtration', d:'HEPA 13'}, pillar2:{t:'Recovery', d:'95%'}, pillar3:{t:'Humidification', d:'40–60%'}, pillar4:{t:'Result', d:'Lower bills every month'}, nexus:{hub:'Energy Efficiency by Defro Air', n2t:'Ecology', n2d:'Less energy consumed directly means fewer CO₂ emissions into the atmosphere', n3t:'Finances', n3d:'Lower energy use = lower electricity bill every month, all year round'} },
     co2: { h2:'<span style="display:inline-block;margin-bottom:0.2em">HOW CO<sub style="font-size:0.45em;line-height:0;vertical-align:sub">2</sub></span><br><span style="color:var(--blue-light)">AFFECTS</span><br>YOU', sub:'ASHRAE and OSHA guidelines: indoor CO₂ levels should not exceed 1,000 ppm.', badge:'ppm maintained by<br>DEFRO air', bar0:'DEFRO — outdoor<br>norm', bar1:'Acceptable level<br>(ASHRAE/OSHA)', bar2:'Drowsiness, fatigue,<br>headache', bar3:'Serious health<br>impairments', bar4:'Maximum 8-hour<br>exposure limit' },
