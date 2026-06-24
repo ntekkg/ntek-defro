@@ -500,6 +500,114 @@ h3 {
   .city-label { font-size: 11px; }
 }
 
+/* ── HUMIDITY ── */
+#humidity { padding: 120px 0; background: var(--surface); }
+.humid-intro { max-width: 720px; margin-bottom: 72px; }
+.humid-intro p { font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.65); margin-top: 24px; max-width: 640px; }
+
+/* Gauge */
+.humid-gauge-section { margin-bottom: 80px; }
+.humid-gauge-track {
+  position: relative; height: 60px; border-radius: 4px; overflow: visible;
+  background: linear-gradient(to right,
+    #8b0000 0%, #c0392b 15%, #e74c3c 28%, #e67e22 36%,
+    #2ecc71 40%, #27ae60 50%, #2ecc71 60%,
+    #2980b9 64%, #1a6faa 80%, #0d3b6e 100%
+  );
+  margin-bottom: 12px;
+}
+.humid-zone-divider {
+  position: absolute; top: 0; bottom: 0; width: 2px;
+  background: rgba(0,0,0,0.6); z-index: 2;
+}
+.humid-zone-divider-label {
+  position: absolute; bottom: -28px; transform: translateX(-50%);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700;
+  letter-spacing: 1px; color: rgba(255,255,255,0.6); white-space: nowrap;
+}
+.humid-zone-tag {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); pointer-events: none;
+}
+/* Needle */
+#humid-needle {
+  position: absolute; top: -14px; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; z-index: 10;
+  transition: left 0s;
+}
+.humid-needle-head { width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 3px solid #07090d; box-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.2); }
+.humid-needle-stem { width: 2px; height: 50px; background: rgba(255,255,255,0.6); }
+#humid-needle-label {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 22px; color: #fff; margin-top: 6px; white-space: nowrap; text-align: center;
+}
+#humid-needle-status {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 2px; white-space: nowrap;
+}
+/* spacer for needle overflow */
+.humid-gauge-spacer { height: 100px; }
+.humid-gauge-pct-row {
+  display: flex; position: relative; height: 20px; margin-top: 4px;
+}
+.humid-pct-mark {
+  position: absolute; transform: translateX(-50%);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: rgba(255,255,255,0.35);
+}
+.humid-zone-row { display: flex; justify-content: space-between; margin-top: 8px; }
+.humid-zone-row span { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
+
+/* Bishkek stat */
+.humid-bishkek { background: rgba(231,76,60,0.07); border: 1px solid rgba(231,76,60,0.2); padding: 48px 56px; display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: center; margin-bottom: 80px; }
+.humid-bishkek-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(72px,10vw,120px); line-height: 0.9; color: #e74c3c; }
+.humid-bishkek-sub { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 10px; }
+.humid-bishkek p { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.6); }
+.humid-bishkek p strong { color: #fff; }
+
+/* Zone cards */
+.humid-zones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 80px; }
+.humid-zone-card { padding: 40px 32px; border: 1px solid var(--border); background: var(--surface2); position: relative; }
+.humid-zone-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.humid-zone-card.dry::before { background: #e74c3c; }
+.humid-zone-card.ok::before { background: #2ecc71; }
+.humid-zone-card.wet::before { background: #2980b9; }
+.humid-zone-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 32px; text-transform: uppercase; line-height: 1; margin-bottom: 4px; }
+.humid-zone-card.dry .humid-zone-title { color: #e74c3c; }
+.humid-zone-card.ok .humid-zone-title { color: #2ecc71; }
+.humid-zone-card.wet .humid-zone-title { color: #2980b9; }
+.humid-zone-pct { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; color: rgba(255,255,255,0.35); letter-spacing: 2px; margin-bottom: 20px; }
+.humid-zone-card ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.humid-zone-card ul li { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.55); padding-left: 18px; position: relative; }
+.humid-zone-card ul li::before { content: '—'; position: absolute; left: 0; color: rgba(255,255,255,0.2); }
+.humid-zone-card.ok ul li::before { color: rgba(46,204,113,0.4); }
+
+/* Health effects */
+.humid-health-header { text-align: center; margin-bottom: 48px; }
+.humid-health-header p { font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.55); max-width: 580px; margin: 16px auto 0; }
+.humid-health-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-bottom: 80px; }
+.humid-health-card { background: var(--bg); padding: 36px 40px; border: 1px solid var(--border); }
+.humid-health-card .tag { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; display: inline-block; margin-bottom: 14px; }
+.humid-health-card .tag.dry-tag { background: rgba(231,76,60,0.15); color: #e74c3c; }
+.humid-health-card .tag.wet-tag { background: rgba(41,128,185,0.15); color: #2980b9; }
+.humid-health-card h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; margin-bottom: 10px; }
+.humid-health-card p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.55); }
+
+/* DEFRO callout */
+.humid-defro { background: linear-gradient(135deg, rgba(26,111,170,0.12) 0%, rgba(79,179,232,0.05) 100%); border: 1px solid rgba(79,179,232,0.2); padding: 56px 64px; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; position: relative; overflow: hidden; }
+.humid-defro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--blue), var(--blue-light)); }
+.humid-defro-badges { display: flex; gap: 40px; margin-top: 24px; flex-wrap: wrap; }
+.humid-defro-badge .val { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 36px; color: var(--blue-light); line-height: 1; }
+.humid-defro-badge .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 0.5px; }
+
+/* responsive */
+@media (max-width: 900px) {
+  .humid-zones { grid-template-columns: 1fr; }
+  .humid-health-grid { grid-template-columns: 1fr; }
+  .humid-bishkek { grid-template-columns: 1fr; gap: 24px; padding: 36px 28px; }
+  .humid-defro { grid-template-columns: 1fr; gap: 32px; padding: 40px 32px; }
+}
+
 /* ── CO2 ── */
 #co2 { padding: 120px 0; background: var(--surface); }
 .co2-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: center; }
@@ -1371,6 +1479,169 @@ footer { background: #040507; border-top: 1px solid var(--border); }
 </section>
 
 
+<!-- HUMIDITY -->
+<section id="humidity">
+  <div class="container">
+
+    <div class="humid-intro reveal">
+      <div class="section-label">Влажность воздуха</div>
+      <h2>УВЛАЖНЕНИЕ<br><span style="color:var(--blue-light)">ВОЗДУХА</span></h2>
+      <p>Воздух в Бишкеке — один из самых сухих среди крупных городов Центральной Азии. Зимой, когда радиаторы отопления накаляют холодный уличный воздух, не добавляя в него ни капли влаги, относительная влажность в квартирах падает до 15–25%. Это уровень пустыни Сахара. При такой влажности слизистая носа пересыхает за считанные часы — и теряет главный защитный барьер от вирусов и бактерий.</p>
+    </div>
+
+    <!-- Humidity gauge animation -->
+    <div class="humid-gauge-section reveal">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:20px">Относительная влажность воздуха в помещении</div>
+      <div class="humid-gauge-track" id="humid-gauge">
+        <!-- zone dividers -->
+        <div class="humid-zone-divider" style="left:40%">
+          <div class="humid-zone-divider-label">40%</div>
+        </div>
+        <div class="humid-zone-divider" style="left:60%">
+          <div class="humid-zone-divider-label">60%</div>
+        </div>
+        <!-- zone labels inside bar -->
+        <div class="humid-zone-tag" style="left:8%">Сухо</div>
+        <div class="humid-zone-tag" style="left:47%;transform:translateY(-50%) translateX(-50%)">Норма</div>
+        <div class="humid-zone-tag" style="right:8%">Влажно</div>
+        <!-- needle -->
+        <div id="humid-needle" style="left:20%">
+          <div class="humid-needle-head"></div>
+          <div class="humid-needle-stem"></div>
+        </div>
+      </div>
+      <div class="humid-gauge-spacer">
+        <div style="padding-top:16px;text-align:center">
+          <div id="humid-needle-label" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:#fff;">20%</div>
+          <div id="humid-needle-status" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#e74c3c;margin-top:4px;">Опасно сухо · типичная квартира зимой</div>
+        </div>
+      </div>
+      <!-- % marks -->
+      <div class="humid-gauge-pct-row">
+        <span class="humid-pct-mark" style="left:0%">0%</span>
+        <span class="humid-pct-mark" style="left:20%">20%</span>
+        <span class="humid-pct-mark" style="left:40%;color:rgba(255,255,255,0.6);font-weight:700">40%</span>
+        <span class="humid-pct-mark" style="left:60%;color:rgba(255,255,255,0.6);font-weight:700">60%</span>
+        <span class="humid-pct-mark" style="left:80%">80%</span>
+        <span class="humid-pct-mark" style="left:100%">100%</span>
+      </div>
+      <div class="humid-zone-row" style="margin-top:16px">
+        <span style="color:#e74c3c">← Слишком сухо (менее 40%)</span>
+        <span style="color:#2ecc71">✓ Оптимально (40–60%)</span>
+        <span style="color:#2980b9">Слишком влажно (более 60%) →</span>
+      </div>
+    </div>
+
+    <!-- Bishkek winter stat -->
+    <div class="humid-bishkek reveal">
+      <div class="humid-bishkek-num">~20%</div>
+      <div>
+        <div class="humid-bishkek-sub">Влажность в типичной квартире Бишкека зимой</div>
+        <p>Радиаторы центрального отопления нагревают холодный уличный воздух, не добавляя в него влагу. Холодный воздух и без того содержит мало воды — после нагрева до +22°C его <strong>относительная влажность падает до 15–25%</strong>. Это уровень пустыни. При такой сухости:</p>
+        <ul style="margin-top:14px;list-style:none;padding:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:14px;color:rgba(255,255,255,0.55);padding-left:18px;position:relative"><span style="position:absolute;left:0;color:rgba(231,76,60,0.5)">—</span>Слизистая носа пересыхает и трескается за 2–3 часа</li>
+          <li style="font-size:14px;color:rgba(255,255,255,0.55);padding-left:18px;position:relative"><span style="position:absolute;left:0;color:rgba(231,76,60,0.5)">—</span>Вирусы выживают в воздухе в 3–4 раза дольше</li>
+          <li style="font-size:14px;color:rgba(255,255,255,0.55);padding-left:18px;position:relative"><span style="position:absolute;left:0;color:rgba(231,76,60,0.5)">—</span>Дети болеют ОРВИ значительно чаще</li>
+          <li style="font-size:14px;color:rgba(255,255,255,0.55);padding-left:18px;position:relative"><span style="position:absolute;left:0;color:rgba(231,76,60,0.5)">—</span>Кожа, глаза и горло сигнализируют о стрессе</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Three zone cards -->
+    <div class="humid-zones">
+      <div class="humid-zone-card dry reveal">
+        <div class="humid-zone-title">Сухо</div>
+        <div class="humid-zone-pct">Менее 40% — опасная зона</div>
+        <ul>
+          <li>Пересыхание слизистой носа и горла</li>
+          <li>Вирусы и бактерии легко проникают через повреждённый барьер</li>
+          <li>Частые ОРВИ, грипп, бронхит</li>
+          <li>Раздражение глаз, сухость кожи и губ</li>
+          <li>Носовые кровотечения у детей</li>
+          <li>Нарушение сна из-за сухости дыхательных путей</li>
+          <li>Статическое электричество, пыль висит в воздухе</li>
+        </ul>
+      </div>
+      <div class="humid-zone-card ok reveal">
+        <div class="humid-zone-title">Норма</div>
+        <div class="humid-zone-pct">40–60% — оптимальная зона</div>
+        <ul>
+          <li>Слизистая работает как защитный барьер</li>
+          <li>Вирусы быстро оседают и теряют активность</li>
+          <li>Дыхание лёгкое, сон комфортный</li>
+          <li>Кожа и глаза не испытывают стресс</li>
+          <li>Дети болеют реже, концентрация выше</li>
+          <li>Мебель и деревянные поверхности не трескаются</li>
+          <li>Именно этот диапазон поддерживает DEFRO air</li>
+        </ul>
+      </div>
+      <div class="humid-zone-card wet reveal">
+        <div class="humid-zone-title">Влажно</div>
+        <div class="humid-zone-pct">Более 60% — зона риска</div>
+        <ul>
+          <li>Плесень начинает расти уже через 24–48 часов</li>
+          <li>Клещи домашней пыли размножаются активно</li>
+          <li>Аллергены и споры плесени в воздухе</li>
+          <li>Разрушение отделки, мебели и конструкций</li>
+          <li>Стойкие неприятные запахи</li>
+          <li>Инфекции дыхательных путей, обострение астмы</li>
+          <li>Конденсат на окнах, сырость в углах</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- How wrong humidity affects health -->
+    <div class="humid-health-header reveal">
+      <div class="section-label">Последствия для здоровья</div>
+      <h2>КАК ВЛАЖНОСТЬ<br><span style="color:#e74c3c">УБИВАЕТ ИММУНИТЕТ</span></h2>
+      <p>Неправильная влажность — постоянный стресс для организма. Он незаметен, но накапливается каждый день.</p>
+    </div>
+    <div class="humid-health-grid">
+      <div class="humid-health-card reveal">
+        <span class="tag dry-tag">Сухой воздух &lt;40%</span>
+        <h4>Иммунный барьер</h4>
+        <p>Слизистая носа — первая линия обороны. При влажности ниже 40% она пересыхает и трескается. Вирусы и бактерии проникают напрямую в кровоток. Именно поэтому в Бишкеке зимой ОРВИ — не исключение, а норма.</p>
+      </div>
+      <div class="humid-health-card reveal">
+        <span class="tag dry-tag">Сухой воздух &lt;40%</span>
+        <h4>Выживаемость вирусов</h4>
+        <p>Исследования показывают: при влажности 20–25% вирус гриппа сохраняет активность до 8 часов в воздухе. При 50% — менее 1 часа. Сухой воздух буквально превращает комнату в инкубатор заразы.</p>
+      </div>
+      <div class="humid-health-card reveal">
+        <span class="tag wet-tag">Влажный воздух &gt;60%</span>
+        <h4>Аллергены и плесень</h4>
+        <p>Споры плесени и клещи домашней пыли — самые распространённые триггеры астмы и аллергий. Оба живут и размножаются только при влажности выше 60%. Контроль влажности — это контроль аллергии.</p>
+      </div>
+      <div class="humid-health-card reveal">
+        <span class="tag wet-tag">Влажный воздух &gt;60%</span>
+        <h4>Дыхательные инфекции</h4>
+        <p>Тёплый влажный воздух — идеальная среда для грибков и бактерий. Хронические бронхиты, синуситы и пневмонии чаще встречаются в сырых помещениях. Особенно опасно для детей и пожилых.</p>
+      </div>
+    </div>
+
+    <!-- DEFRO callout -->
+    <div class="humid-defro reveal">
+      <div>
+        <div class="section-label">Решение DEFRO</div>
+        <h3>40–60% — <em style="color:var(--blue-light);font-style:italic">круглый год,</em><br>автоматически</h3>
+        <p style="font-size:15px;line-height:1.8;color:rgba(255,255,255,0.6);margin-top:16px;max-width:480px">DEFRO air оснащён встроенным увлажнителем с пористой мембраной. Отфильтрованная вода распыляется на мембрану — воздух проходит сквозь неё и насыщается влагой. Никаких бактерий в паре, никакого перелива. Система сама поддерживает нужный уровень.</p>
+        <div class="humid-defro-badges">
+          <div class="humid-defro-badge"><span class="val">40–60%</span><span class="lbl">оптимальная влажность</span></div>
+          <div class="humid-defro-badge"><span class="val">Авто</span><span class="lbl">контроль без участия</span></div>
+          <div class="humid-defro-badge"><span class="val">365</span><span class="lbl">дней в году</span></div>
+        </div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:48px;letter-spacing:4px;color:#fff;line-height:1">DEFRO</div>
+        <div style="font-size:12px;letter-spacing:3px;color:var(--blue-light);text-transform:uppercase;margin-bottom:24px">air</div>
+        <button style="display:inline-block;background:var(--blue);color:#fff;border:none;cursor:pointer;padding:14px 32px;font-family:'Barlow',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:background 0.2s" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Узнать стоимость</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 <!-- CO2 -->
 <section id="co2">
   <div class="container">
@@ -1823,6 +2094,47 @@ window.switchCityChart = function(mode) {
   document.getElementById('btn-winter').className = 'chart-toggle-btn' + (mode === 'winter' ? ' active-winter' : '');
   if (cityChartAnimated) animateCityBars(mode);
 };
+
+// ── Humidity gauge ──
+(function() {
+  const needle = document.getElementById('humid-needle');
+  const labelEl = document.getElementById('humid-needle-label');
+  const statusEl = document.getElementById('humid-needle-status');
+  if (!needle) return;
+  function setNeedle(pct) {
+    needle.style.left = pct + '%';
+    if (labelEl) labelEl.textContent = Math.round(pct) + '%';
+    if (statusEl) {
+      if (pct < 40) {
+        statusEl.textContent = 'Опасно сухо · типичная квартира зимой';
+        statusEl.style.color = '#e74c3c';
+      } else if (pct <= 60) {
+        statusEl.textContent = '✓ Оптимально · DEFRO air';
+        statusEl.style.color = '#2ecc71';
+      } else {
+        statusEl.textContent = 'Слишком влажно';
+        statusEl.style.color = '#2980b9';
+      }
+    }
+  }
+  setNeedle(20);
+  ScrollTrigger.create({
+    trigger: '#humid-gauge', start: 'top 80%', once: true,
+    onEnter() {
+      const obj = { v: 20 };
+      gsap.to(obj, {
+        v: 20, duration: 0.8, ease: 'none',
+        onUpdate() { setNeedle(obj.v); },
+        onComplete() {
+          gsap.to(obj, {
+            v: 50, duration: 2.5, delay: 0.6, ease: 'power2.inOut',
+            onUpdate() { setNeedle(obj.v); }
+          });
+        }
+      });
+    }
+  });
+})();
 
 // ── Stagger animations ──
 gsap.from('.about-num-card', {
