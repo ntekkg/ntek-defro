@@ -1216,9 +1216,9 @@ footer { background: #040507; border-top: 1px solid var(--border); }
     <li><a href="#compare" data-i18n="nav.compare">Сравнение</a></li>
   </ul>
   <div class="lang-switcher">
-    <button class="lang-btn active" data-lang="ru">RU</button>
-    <button class="lang-btn" data-lang="ky">KY</button>
-    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn active" data-lang="ru" onclick="switchLang('ru')">RU</button>
+    <button class="lang-btn" data-lang="ky" onclick="switchLang('ky')">KY</button>
+    <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
   </div>
   <button class="nav-cta" data-i18n="nav.cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Связаться с нами</button>
 </nav>
@@ -2565,7 +2565,9 @@ function switchLang(lang) {
 
 // Lang button listeners
 document.querySelectorAll('.lang-btn[data-lang]').forEach(btn => {
-  btn.addEventListener('click', () => switchLang(btn.dataset.lang));
+  ['click', 'touchend', 'mousedown'].forEach(ev => {
+    btn.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); switchLang(btn.dataset.lang); });
+  });
 });
 
 // Init: restore saved language
