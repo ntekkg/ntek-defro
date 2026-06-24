@@ -2447,7 +2447,10 @@ gsap.from('.testimonial-card', {
   opacity: 0, y: 40, duration: 0.7, stagger: 0.15, ease: 'power2.out'
 });
 
-// ── i18n ──
+
+</script>
+<script>
+// ── i18n — separate block, survives GSAP failures ──
 const translations = {
   ru: {
     nav: { about:'О системе', how:'Принцип работы', features:'Преимущества', compare:'Сравнение', reviews:'Отзывы', cta:'Связаться с нами' },
