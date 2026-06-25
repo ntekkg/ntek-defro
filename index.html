@@ -763,7 +763,11 @@ input[type=range].recov-range::-webkit-slider-thumb { -webkit-appearance: none; 
 .bar-critical .co2-bar-fill { background: #b71c1c; }
 .bar-defro { background: rgba(79,179,232,0.07); outline: 1px solid rgba(79,179,232,0.25); border-radius: 2px; }
 .bar-defro .co2-bar-label { color: var(--blue-light); font-weight: 800; }
-.bar-defro .co2-bar-desc { color: rgba(255,255,255,0.9); }
+.bar-defro .co2-bar-desc { color: var(--blue-light); }
+.bar-ok .co2-bar-desc { color: #4caf50; }
+.bar-warning .co2-bar-desc { color: #ffb74d; }
+.bar-bad .co2-bar-desc { color: #f44336; }
+.bar-critical .co2-bar-desc { color: #e53935; }
 
 /* ── FEATURES ── */
 #features { padding: 120px 0; background: var(--surface); }
